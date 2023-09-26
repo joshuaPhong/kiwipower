@@ -16,6 +16,6 @@ class CustomUserChangeForm(UserChangeForm):
     '''
     This class is used to customize the form for the CustomUser model.
     '''
-        class Meta:
-            model = CustomUser
-            fields = ('username', 'email')
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'email')
