@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'kiwipower',
     'pages',
     'accounts',
+    'statistics',
 ]
 
 MIDDLEWARE = [
