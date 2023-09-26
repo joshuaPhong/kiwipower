@@ -7,6 +7,9 @@ from .models import CustomUser
 # Register your models here.
 
 class CustomUserAdmin(UserAdmin):
+    """
+    This class is used to customize the admin page for the CustomUser model.
+    """
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
