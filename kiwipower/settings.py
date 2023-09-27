@@ -42,8 +42,10 @@ INSTALLED_APPS = [
     'pages',
     'accounts',
     'display_data',
-    'bootstrap5',
-    # 'bootstrap_css',
+    'bootstrap5',  # added for bootstrap in the base.html template to work
+    'pandas',  # added for pandas to work in display_data/views.py
+    'numpy'
+    'matplotlib'  # added for matplotlib to work in display_data/views.py
 ]
 
 MIDDLEWARE = [

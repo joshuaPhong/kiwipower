@@ -28,8 +28,9 @@
             {% for consumption in continent_consumption %}
                 <tr>
                     <td>
-                        {{ consumption.year }}
+                        <a href="{% url 'continent_consumption_detail' consumption.pk %}">{{ consumption.year }}</a>
                     </td>
+
                     <td>
                         {{ consumption.world|floatformat:2 }}
                     </td>
@@ -75,5 +76,7 @@
             {% endfor %}
             </tbody>
         </table>
+        <a href="{% url 'home' %}">Home</a>
+        <a href=""></a>
     </div>
 {% endblock %}
