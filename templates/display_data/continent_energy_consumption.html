@@ -1,0 +1,11 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}Continental Energy Consumption{% endblock %}
+
+{% block content %}
+
+<h1>Continental Energy Consumption</h1>
+    {% for consumption in continent_consumption %}
+        <p>id{{ consumption.id }}</p>
+    {% endfor %}
+{% endblock %}
