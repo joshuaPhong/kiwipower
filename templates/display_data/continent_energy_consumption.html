@@ -4,74 +4,76 @@
 
 {% block content %}
 
-<h1>Continental Energy Consumption</h1>
-    <table>
-    <thead>
-        <tr>
-            <th>year</th>
-            <th>world</th>
-            <th>oecd</th>
-            <th>brics</th>
-            <th>europe</th>
-            <th>north_america</th>
-            <th>latin_america</th>
-            <th>asia</th>
-            <th>pacific</th>
-            <th>africa</th>
-            <th>middle_east</th>
-            <th>cis</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for consumption in continent_consumption %}
-        <tr>
-                <td>
-            {{ consumption.year }}
-        </td>
-        <td>
-            {{ consumption.world|floatformat:2 }}
-        </td>
-        <td>
-            {{ consumption.oecd|floatformat:2 }}
-        </td>
-        <td>
-            {{ consumption.brics|floatformat:2 }}
-        </td>
-        <td>
-            {{ consumption.europe|floatformat:2 }}
-        </td>
-        <td>
-            {{ consumption.north_america|floatformat:2 }}
-        </td>
-        <td>
-            {{ consumption.latin_america|floatformat:2 }}
-        </td>
-        <td>
-            {{ consumption.asia|floatformat:2 }}
-        </td>
-        <td>
-            {{ consumption.pacific|floatformat:2 }}
-        </td>
-        <td>
-            {{ consumption.africa|floatformat:2 }}
-        </td>
-        <td>
-            {{ consumption.middle_east|floatformat:2 }}
-        </td>
-        <td>
-            {{ consumption.cis|floatformat:2 }}
-        </td>
-        <td>
-{#            <a href="{{ url_for('pages.continent_consumption', id=consumption.id) }}">View</a>#}
-        </td>
+    <div class="container">
+        <h1>Continental Energy Consumption</h1>
+        <table class="table table-dark table-striped">
+            <thead>
+            <tr>
+                <th>year</th>
+                <th>world</th>
+                <th>oecd</th>
+                <th>brics</th>
+                <th>europe</th>
+                <th>north_america</th>
+                <th>latin_america</th>
+                <th>asia</th>
+                <th>pacific</th>
+                <th>africa</th>
+                <th>middle_east</th>
+                <th>cis</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for consumption in continent_consumption %}
+                <tr>
+                    <td>
+                        {{ consumption.year }}
+                    </td>
+                    <td>
+                        {{ consumption.world|floatformat:2 }}
+                    </td>
+                    <td>
+                        {{ consumption.oecd|floatformat:2 }}
+                    </td>
+                    <td>
+                        {{ consumption.brics|floatformat:2 }}
+                    </td>
+                    <td>
+                        {{ consumption.europe|floatformat:2 }}
+                    </td>
+                    <td>
+                        {{ consumption.north_america|floatformat:2 }}
+                    </td>
+                    <td>
+                        {{ consumption.latin_america|floatformat:2 }}
+                    </td>
+                    <td>
+                        {{ consumption.asia|floatformat:2 }}
+                    </td>
+                    <td>
+                        {{ consumption.pacific|floatformat:2 }}
+                    </td>
+                    <td>
+                        {{ consumption.africa|floatformat:2 }}
+                    </td>
+                    <td>
+                        {{ consumption.middle_east|floatformat:2 }}
+                    </td>
+                    <td>
+                        {{ consumption.cis|floatformat:2 }}
+                    </td>
+                    <td>
+                        {#            <a href="{{ url_for('pages.continent_consumption', id=consumption.id) }}">View</a>#}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No data</td>
+                </tr>
 
-        </tr>
-        {% empty %}
-        <tr>
-        <td colspan="3">No data</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-    </table>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
