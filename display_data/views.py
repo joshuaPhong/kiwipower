@@ -13,6 +13,7 @@ class ContinentConsumptionListView(ListView):
     template_name = 'display_data/continent_energy_consumption.html'
     context_object_name = 'continent_consumption'
     ordering = ['year']
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
