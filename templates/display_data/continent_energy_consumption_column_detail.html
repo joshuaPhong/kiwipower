@@ -1,0 +1,22 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Column Detail</h1>
+    <a href="{% url 'continent_consumption' %}">Back</a>
+    {#    <a href="{% url 'country_consumption' %}">Back to country tablet</a>#}
+
+    <h2>{{ column_data.name }}</h2>
+    <p>This is the detailed data for the {{ column_data.name }} column:</p>
+
+    <ul>
+        {% for value in column_data %}
+            <li>{{ value }}</li>
+        {% endfor %}
+    </ul>
+    <div>
+        <img src="{% static 'display_data/images/plot.png' %}" alt="plot">
+    </div>
+
+
+{% endblock %}
