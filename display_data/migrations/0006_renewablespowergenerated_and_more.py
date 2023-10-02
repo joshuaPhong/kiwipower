@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('display_data', '0005_nonrenewablestotalpowergenerated'),
     ]
@@ -13,7 +12,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RenewablesPowerGenerated',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True,
+                                           serialize=False, verbose_name='ID')),
                 ('year', models.IntegerField()),
                 ('hydro', models.FloatField()),
                 ('biofuels', models.FloatField()),
@@ -24,15 +24,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RenewableTotalPowerGenerated',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True,
+                                           serialize=False, verbose_name='ID')),
                 ('mode_of_generation', models.CharField(max_length=100)),
                 ('contribution_twh', models.FloatField()),
             ],
         ),
         migrations.CreateModel(
-            name='TopTewntyRenewableCountries',
+            name='TopTwentyRenewableCountries',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True,
+                                           serialize=False, verbose_name='ID')),
                 ('country', models.CharField(max_length=100)),
                 ('hydro', models.FloatField()),
                 ('biofuels', models.FloatField()),
