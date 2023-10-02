@@ -11,7 +11,7 @@
 
     <ul>
         {% for value in column_data %}
-            <li>{{ value }}</li>
+            <li>{{ value|floatformat:2 }}</li>
         {% endfor %}
     </ul>
     <div>
