@@ -6,7 +6,8 @@ from .views import (ContinentConsumptionListView,
                     CountryConsumptionListView, CountryConsumptionDetailView,
                     CountryConsumptionColumnView,
                     NonRenewablesTotalPowerListView,
-                    CountryConsumptionView, )
+                    CountryConsumptionView, RenewablePowerGenerationListView,
+                    RenewablePowerDetailView)
 
 urlpatterns = [
     path('continent_energy_consumption/',
@@ -32,4 +33,9 @@ urlpatterns = [
     path('country_energy_consumption_combined.html/',
          CountryConsumptionView.as_view(),
          name='country_consumption_combined'),
+    path('renewable_power_generated/',
+         RenewablePowerGenerationListView.as_view(), name='renewable_power'),
+    path('renewable_power_generated_detail/<int:pk>/',
+         RenewablePowerDetailView.as_view(),
+         name='renewable_power_detail'),
 ]

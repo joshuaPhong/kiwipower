@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView, TemplateView
 from .models import ContinentConsumption, CountryConsumption, \
-    NonRenewablesTotalPowerGenerated
+    NonRenewablesTotalPowerGenerated, RenewablePowerGenerated
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -234,3 +234,23 @@ class NonRenewablesTotalPowerListView(ListView):
 
 class CountryConsumptionCombinedView:
     pass
+
+
+class RenewablePowerGenerationListView(ListView):
+    model = RenewablePowerGenerated
+    template_name = 'display_data/renewable_power_generated.html'
+    context_object_name = 'renewable_power_generated'
+    ordering = ['year']
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        years = RenewablePowerGenerated.objects.values_list('year', flat=True)
+        context['years'] = years
+        return context
+
+
+class RenewablePowerDetailView(DetailView):
+    model = RenewablePowerGenerated
+    template_name = 'display_data/renewable_power_generated_detail.html'
+    context_object_name = 'renewable_power_generated'

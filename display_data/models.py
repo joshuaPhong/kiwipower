@@ -95,7 +95,7 @@ class NonRenewablesTotalPowerGenerated(models.Model):
         return str(self.mode_of_generation)
 
 
-class RenewablesPowerGenerated(models.Model):
+class RenewablePowerGenerated(models.Model):
     year = models.IntegerField()
     hydro = models.FloatField()
     biofuels = models.FloatField()
