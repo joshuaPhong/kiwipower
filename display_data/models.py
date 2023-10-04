@@ -2,10 +2,10 @@ from django.db import models
 
 
 class ContinentConsumption(models.Model):
-    '''
+    """
     this model will contain the data for the power consumption of each
     continent or continental group
-    '''
+    """
     year = models.IntegerField()
     world = models.FloatField()
     oecd = models.FloatField()
@@ -27,12 +27,16 @@ class ContinentConsumption(models.Model):
 
 
 class CountryConsumption(models.Model):
-    # id = models.AutoField(primary_key=True)
+    """
+    this model will contain the data for the power consumption of each country
+    """
+
     year = models.IntegerField()
     china = models.IntegerField()
     usa = models.IntegerField()
+    brazil = models.IntegerField()
     belgium = models.IntegerField()
-    croatia = models.IntegerField()
+    czechia = models.IntegerField()
     france = models.IntegerField()
     germany = models.IntegerField()
     italy = models.IntegerField()
@@ -68,6 +72,7 @@ class CountryConsumption(models.Model):
     egypt = models.IntegerField()
     nigeria = models.IntegerField()
     south_africa = models.IntegerField()
+    iran = models.IntegerField()
     kuwait = models.IntegerField()
     saudi_arabia = models.IntegerField()
     u_a_e = models.IntegerField()
@@ -115,7 +120,7 @@ class RenewableTotalPowerGenerated(models.Model):
         return str(self.mode_of_generation)
 
 
-class TopTewntyRenewableCountries(models.Model):
+class TopTwentyRenewableCountries(models.Model):
     country = models.CharField(max_length=100)
     hydro = models.FloatField()
     biofuels = models.FloatField()

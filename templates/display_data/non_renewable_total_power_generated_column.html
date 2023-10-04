@@ -1,0 +1,13 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Column Detail</h1>
+    <a href="{% url 'home' %}">Back</a>
+
+    <div>
+        <img src="{% static 'display_data/images/bar.png' %}" alt="plot">
+    </div>
+
+
+{% endblock %}
