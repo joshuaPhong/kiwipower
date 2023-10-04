@@ -5,15 +5,16 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Year: {{ country_consumption_detail.year }}</h1>
+    <h1>Year: {{ country_consumption.year }}</h1>
 
     <table class="table table-dark">
         <thead>
         <tr>
             <th scope="col">CHINA</th>
             <th scope="col">USA</th>
+            <th scope="col">BRAZIL</th>
             <th scope="col">BELGIUM</th>
-            <th scope="col">CROATIA</th>
+            <th scope="col">CZECHIA</th>
             <th scope="col">FRANCE</th>
             <th scope="col">GERMANY</th>
             <th scope="col">ITALY</th>
@@ -49,6 +50,7 @@
             <th scope="col">EGYPT</th>
             <th scope="col">NIGERIA</th>
             <th scope="col">SOUTH AFRICA</th>
+            <th scope="col">IRAN</th>
             <th scope="col">KUWAIT</th>
             <th scope="col">SAUDI ARABIA</th>
             <th scope="col">UAE</th>
@@ -59,8 +61,9 @@
         <tr>
             <td>{{ country_consumption.china|floatformat:2 }}</td>
             <td>{{ country_consumption.usa|floatformat:2 }}</td>
+            <td>{{ country_consumption.brazil|floatformat:2 }}</td>
             <td>{{ country_consumption.belgium|floatformat:2 }}</td>
-            <td>{{ country_consumption.croatia|floatformat:2 }}</td>
+            <td>{{ country_consumption.czechia|floatformat:2 }}</td>
             <td>{{ country_consumption.france|floatformat:2 }}</td>
             <td>{{ country_consumption.germany|floatformat:2 }}</td>
             <td>{{ country_consumption.italy|floatformat:2 }}</td>
@@ -96,13 +99,17 @@
             <td>{{ country_consumption.egypt|floatformat:2 }}</td>
             <td>{{ country_consumption.nigeria|floatformat:2 }}</td>
             <td>{{ country_consumption.south_africa|floatformat:2 }}</td>
+            <td>{{ country_consumption.iran|floatformat:2 }}</td>
             <td>{{ country_consumption.kuwait|floatformat:2 }}</td>
             <td>{{ country_consumption.saudi_arabia|floatformat:2 }}</td>
             <td>{{ country_consumption.u_a_e|floatformat:2 }}</td>
         </tr>
         </tbody>
     </table>
-
+    <div>
+        <p>maximum power user in {{ country_consumption.year }} {{ max_country }} {{ max_value }} TWh</p>
+        <p>maximum power user in {{ country_consumption.year }} {{ min_country }} {{ min_value }} TWh</p>
+    </div>
     <a href="{% url 'country_consumption' %}">Back</a>
     <a href="{% url 'home' %}">Home</a>
 {% endblock %}

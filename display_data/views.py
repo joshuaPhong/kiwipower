@@ -120,14 +120,42 @@ class CountryConsumptionListView(ListView):
 
 class CountryConsumptionDetailView(DetailView):
     model = CountryConsumption
-
     template_name = 'display_data/country_energy_consumption_detail.html'
-
     context_object_name = 'country_consumption'
 
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.order_by('year')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Retrieve the object
+        country_consumption = self.get_object()
+
+        # Get a list of all field names in the model (excluding id and year)
+        field_names = [field.name for field in
+                       CountryConsumption._meta.get_fields()][2:]
+
+        # Extract the data values for all fields dynamically
+        data = [getattr(country_consumption, field_name) for field_name in
+                field_names]
+
+        # Create a list of tuples with (field_name, value) pairs
+        data_with_names = list(zip(field_names, data))
+
+        # Calculate the highest and lowest values in the row
+        min_pair = min(data_with_names, key=lambda x: x[1])
+        max_pair = max(data_with_names, key=lambda x: x[1])
+
+        # Add the min and max values and their corresponding field names to
+        # the context
+        context['min_value'] = min_pair[1]
+        context['max_value'] = max_pair[1]
+        context['min_country'] = min_pair[0]
+        context['max_country'] = max_pair[0]
+
+        return context
 
 
 class CountryConsumptionColumnView(TemplateView):
@@ -200,52 +228,6 @@ class NonRenewablesTotalPowerListView(ListView):
             plt.close()
 
             context['plot_path'] = plot_path
-
-        return context
-
-
-class NonRenewablesTotalPowerDetailView(DetailView):
-    model = NonRenewablesTotalPowerGenerated
-    template_name = ('display_data/non_renewable_total_power_generated_detail'
-                     '.html')
-    context_object_name = 'non_renewables_total_power'
-
-
-class NonRenewableTotalPowerColumnView(TemplateView):
-    template_name = ('display_data/non_renewable_total_power_generated_column'
-                     '.html')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        queryset = NonRenewablesTotalPowerGenerated.objects.all()
-        non_renewable_power = pd.DataFrame.from_records(
-            queryset.values())
-
-        mode = non_renewable_power['mode_of_generation']
-        contributions = non_renewable_power['contribution_twh']
-
-        # Create a bar graph
-        plt.figure(figsize=(10, 6))
-        plt.bar(mode, contributions,
-                color='skyblue')
-        plt.xlabel('Contribution (TWh)')
-        plt.ylabel('Mode of Generation')
-        plt.title('by Mode of Generation')
-        plt.gca().invert_yaxis()  # Invert the y-axis for better
-        # readability
-        plt.ylim(0, max(contributions) + 200)
-        # # Annotate the bars with values
-        for i, v in enumerate(contributions):
-            plt.text(mode[i], v + 100, str(v), ha='center',
-                     va='bottom', fontsize=12)
-
-        # Save the plot image
-        plot_path = 'static/display_data/images/bar.png'
-        plt.savefig(plot_path, format='png')
-        plt.close()
-
-        context['plot_path'] = plot_path
 
         return context
 

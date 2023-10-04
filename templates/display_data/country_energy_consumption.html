@@ -14,9 +14,10 @@
                 <th><a href="{% url 'country_energy_consumption_column_detail' column_name='year' %}">year</a></th>
                 <th><a href="{% url 'country_energy_consumption_column_detail' column_name='china' %}">china</a></th>
                 <th><a href="{% url 'country_energy_consumption_column_detail' column_name='usa' %}">usa</a></th>
+                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='brazil' %}">brazil</a></th>
                 <th><a href="{% url 'country_energy_consumption_column_detail' column_name='belgium' %}">belgium</a>
                 </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='croatia' %}">croatia</a>
+                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='czechia' %}">czechia</a>
                 </th>
                 <th>
                     <a href="{% url 'country_energy_consumption_column_detail' column_name='france' %}">france</a>
@@ -82,6 +83,9 @@
                 </th>
                 <th><a href="{% url 'country_energy_consumption_column_detail' column_name='south_africa' %}">south_africa</a>
                 </th>
+                </th>
+                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='iran' %}">iran</a>
+                </th>
                 <th><a href="{% url 'country_energy_consumption_column_detail' column_name='kuwait' %}">kuwait</a></th>
                 <th><a href="{% url 'country_energy_consumption_column_detail' column_name='saudi_arabia' %}">saudi_arabia</a>
                 </th>
@@ -102,10 +106,13 @@
                         {{ consumption.usa|floatformat:2 }}
                     </td>
                     <td>
+                        {{ consumption.brazil|floatformat:2 }}
+                    </td>
+                    <td>
                         {{ consumption.belgium|floatformat:2 }}
                     </td>
                     <td>
-                        {{ consumption.croatia|floatformat:2 }}
+                        {{ consumption.czechia|floatformat:2 }}
                     </td>
                     <td>
                         {{ consumption.france|floatformat:2 }}
@@ -212,6 +219,9 @@
                     </td>
                     <td>
                         {{ consumption.south_africa|floatformat:2 }}
+                    </td>
+                    <td>
+                        {{ consumption.iran|floatformat:2 }}
                     </td>
                     <td>
                         {{ consumption.kuwait|floatformat:2 }}
