@@ -11,11 +11,11 @@
         <table class="table table-dark table-striped">
             <thead>
             <tr>
-                <th><a href="{% url 'renewable_power' %}">YEAR (TWh)</a></th>
-                <th><a href="{% url 'renewable_power' %}">HYDRO (TWh)</a></th>
-                <th><a href="{% url 'renewable_power' %}">BIOFUELS (TWh)</a></th>
-                <th><a href="{% url 'renewable_power' %}">SOLAR (TWh)</a></th>
-                <th><a href="{% url 'renewable_power' %}">GEOTHERMAL (TWh)</a>
+                <th><a href="{% url 'renewable_power_column_detail' column_name='year' %}">YEAR (TWh)</a></th>
+                <th><a href="{% url 'renewable_power_column_detail' column_name='hydro' %}">HYDRO (TWh)</a></th>
+                <th><a href="{% url 'renewable_power_column_detail' column_name='biofuels' %}">BIOFUELS (TWh)</a></th>
+                <th><a href="{% url 'renewable_power_column_detail' column_name='solar' %}">SOLAR (TWh)</a></th>
+                <th><a href="{% url 'renewable_power_column_detail' column_name='geo_thermal' %}">GEOTHERMAL (TWh)</a>
                 </th>
             </tr>
             </thead>

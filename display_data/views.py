@@ -254,3 +254,37 @@ class RenewablePowerDetailView(DetailView):
     model = RenewablePowerGenerated
     template_name = 'display_data/renewable_power_generated_detail.html'
     context_object_name = 'renewable_power_generated'
+
+
+class RenewablePowerColumnView(TemplateView):
+    template_name = ('display_data/renewable_power_column_detail'
+                     '.html')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        column_name = self.kwargs.get('column_name', None)
+
+        if column_name:
+            queryset = RenewablePowerGenerated.objects.all().order_by('year')
+            renewable_power = pd.DataFrame.from_records(
+                queryset.values())
+
+            column_data = renewable_power[column_name]
+            context['column_data'] = column_data
+
+            #     create a plot
+            plt.figure(figsize=(10, 5))
+            plt.plot(renewable_power['year'], column_data)
+            plt.xlabel('Year')
+            plt.ylabel(f'{column_name}(TWh)')
+            plt.title(f'{column_name} by Year (TWh)')
+            plt.grid(True)
+
+            # save img
+            plot_path = 'static/display_data/images/plot.png'
+            plt.savefig(plot_path)
+            plt.close()
+
+            context['plot_path'] = plot_path
+
+        return context
