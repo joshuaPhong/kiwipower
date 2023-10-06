@@ -3,7 +3,7 @@ from django.db import IntegrityError
 from django.test import TestCase, Client
 from display_data.models import ContinentConsumption, \
     NonRenewablesTotalPowerGenerated, \
-    CountryConsumption, RenewablePowerGenerated
+    CountryConsumption, RenewablePowerGenerated, RenewableTotalPowerGenerated
 from django.urls import reverse, resolve
 import os
 from PIL import Image
@@ -15,7 +15,9 @@ from display_data.views import (ContinentConsumptionListView,
                                 CountryConsumptionDetailView,
                                 CountryConsumptionColumnView,
                                 NonRenewablesTotalPowerListView,
-                                CountryConsumptionView)
+                                CountryConsumptionView,
+                                RenewablesTotalPowerListView,
+                                NonRenewablesTotalPowerListView, )
 
 
 # Common base class with shared setup logic
@@ -161,3 +163,68 @@ class TestRenewablePowerGeneration(TestCase):
                                                    biofuels=200.0,
                                                    solar=300.0,
                                                    geo_thermal=150.0)
+
+
+class TestRenewablesTotalPowerGeneratedModel(TestCase):
+    """
+    Test the NonRenewablesTotalPowerGenerated model
+    """
+
+    def setUp(self) -> None:
+        self.client = Client()
+        # Create a sample NonRenewablesTotalPowerGenerated instance for testing
+        self.renewable_total_power = (
+            RenewableTotalPowerGenerated.objects.create(
+                mode_of_generation="hydro",
+                contribution_twh=1000.0
+            ))
+
+    def test_if_the_objects_are_created(self):
+        """
+        Test if the objects are created
+        :return: pass error fail
+        """
+        self.assertEqual(self.renewable_total_power.mode_of_generation,
+                         "hydro")
+        self.assertEqual(self.renewable_total_power.contribution_twh, 1000.0)
+
+    def test_str_method(self):
+        """
+        Test the __str__ method of NonRenewablesTotalPowerGenerated
+        :return: pass error fail
+        """
+        self.assertEqual(str(self.renewable_total_power), "hydro")
+
+
+class TestNonRenewablesTotalPowerGenerated(TestCase):
+    """
+    Test the NonRenewablesTotalPowerGenerated model
+    """
+
+    def setUp(self) -> None:
+        self.client = Client()
+        # Create a sample RenewablesTotalPowerGenerated instance for testing
+        self.non_renewable_total_power = (
+            RenewableTotalPowerGenerated.objects.create(
+                mode_of_generation="coal",
+                contribution_twh=1000.0
+            ))
+
+    def test_if_the_objects_are_created(self):
+        """
+        Test if the objects are created
+        :return: pass error fail
+        """
+        self.assertEqual(self.non_renewable_total_power.mode_of_generation,
+                         "coal")
+        self.assertEqual(self.non_renewable_total_power.contribution_twh,
+                         1000.0)
+
+    def test_str_method(self):
+        """
+        Test the __str__ method of NonRenewablesTotalPowerGenerated
+        :return: pass error fail
+        """
+        # Test the __str__ method of NonRenewablesTotalPowerGenerated coal
+        # will be returned from the list
+        self.assertEqual(str(self.non_renewable_total_power), "coal")

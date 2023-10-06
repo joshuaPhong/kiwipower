@@ -279,6 +279,25 @@ class BaseClassCountryConsumptionTestCase(TestCase):
         )
 
 
+class TestCountryConsumptionModel(BaseClassCountryConsumptionTestCase):
+    def test_create_country_consumption(self):
+        """
+        Test creating a CountryConsumption instance
+        :return:
+        """
+        # Test if a CountryConsumption instance can be created and saved
+        self.assertEqual(CountryConsumption.objects.count(), 1)
+        # Test if the 'year' field is correct
+        self.assertEqual(self.country_consumption.year, 2020)
+
+    def test_str_method(self):
+        """
+        Test the __str__ method of RenewablePowerGenerated
+        :return: pass error fail
+        """
+        self.assertEqual(str(self.country_consumption), "2020")
+
+
 class TestCountryConsumptionListView(BaseClassCountryConsumptionTestCase):
     def setUp(self):
         self.view_url = reverse(
