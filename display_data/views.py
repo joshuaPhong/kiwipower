@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView, TemplateView
 from .models import ContinentConsumption, CountryConsumption, \
-    NonRenewablesTotalPowerGenerated
+    NonRenewablesTotalPowerGenerated, RenewablePowerGenerated, \
+    RenewableTotalPowerGenerated
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -234,3 +235,102 @@ class NonRenewablesTotalPowerListView(ListView):
 
 class CountryConsumptionCombinedView:
     pass
+
+
+class RenewablePowerGenerationListView(ListView):
+    model = RenewablePowerGenerated
+    template_name = 'display_data/renewable_power_generated.html'
+    context_object_name = 'renewable_power_generated'
+    ordering = ['year']
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        years = RenewablePowerGenerated.objects.values_list('year', flat=True)
+        context['years'] = years
+        return context
+
+
+class RenewablePowerDetailView(DetailView):
+    model = RenewablePowerGenerated
+    template_name = 'display_data/renewable_power_generated_detail.html'
+    context_object_name = 'renewable_power_generated'
+
+
+class RenewablePowerColumnView(TemplateView):
+    template_name = ('display_data/renewable_power_column_detail'
+                     '.html')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # get column name from url
+        column_name = self.kwargs.get('column_name', None)
+        # is there a column name?
+        if column_name:
+            #     get all renewable power generated objects ordered by year
+            queryset = RenewablePowerGenerated.objects.all().order_by('year')
+            #     convert the queryset to a dataframe
+            renewable_power = pd.DataFrame.from_records(
+                queryset.values())
+            #    get the column data
+            column_data = renewable_power[column_name]
+            #     add the column data to the context
+            context['column_data'] = column_data
+
+            #     create a plot
+            plt.figure(figsize=(10, 5))
+            plt.plot(renewable_power['year'], column_data)
+            plt.xlabel('Year')
+            plt.ylabel(f'{column_name}(TWh)')
+            plt.title(f'{column_name} by Year (TWh)')
+            plt.grid(True)
+
+            # save img
+            plot_path = 'static/display_data/images/plot.png'
+            plt.savefig(plot_path)
+            plt.close()
+
+            context['plot_path'] = plot_path
+
+        return context
+
+
+#
+class RenewablesTotalPowerListView(ListView):
+    model = RenewableTotalPowerGenerated
+    template_name = 'display_data/renewables_total_power_generated.html'
+    context_object_name = 'renewables_total_power'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        column_name = self.kwargs.get('column_name', None)
+
+        if column_name:
+            queryset = RenewableTotalPowerGenerated.objects.all()
+            renewable_total_power = pd.DataFrame.from_records(
+                queryset.values())
+
+            column_data = renewable_total_power[column_name]
+            context['column_data'] = column_data
+
+            # Create a bar graph
+            plt.figure(figsize=(10, 6))
+            plt.barh(renewable_total_power['mode_of_generation'], column_data,
+                     color='skyblue')
+            plt.xlabel('Contribution (TWh)')
+            plt.title(f'{column_name} by Mode of Generation')
+            plt.gca().invert_yaxis()  # Invert the y-axis for better readability
+
+            # Annotate the bars with values
+            for i, v in enumerate(column_data):
+                plt.text(v + 100, i, str(v), color='black', va='center',
+                         fontsize=12, fontweight='bold')
+
+            # Save the plot image
+            plot_path = 'static/display_data/images/bar_renewable_total.png'
+            plt.savefig(plot_path, format='png')
+            plt.close()
+
+            context['plot_path'] = plot_path
+
+        return context
