@@ -19,7 +19,8 @@ from display_data.views import (ContinentConsumptionListView, \
                                 NonRenewablesTotalPowerListView,
                                 RenewablePowerGenerationListView,
                                 RenewablePowerDetailView,
-                                RenewablePowerColumnView)
+                                RenewablePowerColumnView,
+                                RenewablesTotalPowerListView)
 
 
 class UrlsTest(TestCase):
@@ -122,3 +123,12 @@ class UrlsTest(TestCase):
                       kwargs={'column_name': 'example_column'})
         self.assertEqual(resolve(url).func.view_class,
                          RenewablePowerColumnView)
+
+    def test_renewables_total_power_generated_url(self):
+        """
+        Test renewable_power_generated_column_url
+        :return: pass, error or fail
+        """
+        url = reverse('renewables_total_power')
+        self.assertEqual(resolve(url).func.view_class,
+                         RenewablesTotalPowerListView)
