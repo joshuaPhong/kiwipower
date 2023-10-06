@@ -1,7 +1,9 @@
+from django.db import IntegrityError
+
 from django.test import TestCase, Client
 from display_data.models import ContinentConsumption, \
     NonRenewablesTotalPowerGenerated, \
-    CountryConsumption
+    CountryConsumption, RenewablePowerGenerated
 from django.urls import reverse, resolve
 import os
 from PIL import Image
@@ -48,7 +50,7 @@ class BaseContinentConsumptionTestCase(TestCase):
         )
 
 
-class ContinentConsumptionModelTest(BaseContinentConsumptionTestCase):
+class TestContinentConsumptionModel(BaseContinentConsumptionTestCase):
     """
     Test the ContinentConsumption model
     """
@@ -108,3 +110,54 @@ class ContinentConsumptionModelTest(BaseContinentConsumptionTestCase):
         # Test deleting a ContinentConsumption instance
         self.continent_consumption.delete()
         self.assertEqual(ContinentConsumption.objects.count(), 0)
+
+
+class TestRenewablePowerGeneration(TestCase):
+    """
+    Test the RenewablePowerGeneration model
+    """
+
+    def setUp(self) -> None:
+        self.client = Client()
+        # Create a sample RenewablePowerGenerated instance for testing
+        self.renewable_power = RenewablePowerGenerated.objects.create(
+            year=2020,
+            hydro=1000.0,
+            biofuels=200.0,
+            solar=300.0,
+            geo_thermal=150.0
+        )
+
+    def test_if_the_objects_are_created(self):
+        """
+        Test if the objects are created
+        :return: pass error fail
+        """
+        self.assertEqual(self.renewable_power.year, 2020)
+        self.assertEqual(self.renewable_power.hydro, 1000.0)
+        self.assertEqual(self.renewable_power.biofuels, 200.0)
+        self.assertEqual(self.renewable_power.solar, 300.0)
+        self.assertEqual(self.renewable_power.geo_thermal, 150.0)
+
+    def test_str_method(self):
+        """
+        Test the __str__ method of RenewablePowerGenerated
+        :return: pass error fail
+        """
+        self.assertEqual(str(self.renewable_power), "2020")
+
+    def test_renewable_power_unique_year(self):
+        """
+        Test if the objects are unique. Compare the objects with the same
+        value
+        This test raised no exception first run, will change year in model to
+        unique and run again
+        :return:
+        """
+
+        with self.assertRaises(IntegrityError):
+            RenewablePowerGenerated.objects.create(year=2020,
+                                                   hydro=1000.0,
+                                                   biofuels=200.0,
+                                                   solar=300.0,
+                                                   geo_thermal=150.0)

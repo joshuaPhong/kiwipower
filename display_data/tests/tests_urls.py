@@ -10,10 +10,16 @@ from django.test import SimpleTestCase
 
 from django.urls import reverse
 
-from display_data.views import ContinentConsumptionListView, \
-    ContinentConsumptionDetailView, ContinentConsumptionColumnView, \
-    CountryConsumptionListView, CountryConsumptionDetailView, \
-    CountryConsumptionColumnView, NonRenewablesTotalPowerListView
+from display_data.views import (ContinentConsumptionListView, \
+                                ContinentConsumptionDetailView,
+                                ContinentConsumptionColumnView, \
+                                CountryConsumptionListView,
+                                CountryConsumptionDetailView, \
+                                CountryConsumptionColumnView,
+                                NonRenewablesTotalPowerListView,
+                                RenewablePowerGenerationListView,
+                                RenewablePowerDetailView,
+                                RenewablePowerColumnView)
 
 
 class UrlsTest(TestCase):
@@ -87,3 +93,32 @@ class UrlsTest(TestCase):
         url = reverse('non_renewable_total_power')
         self.assertEqual(resolve(url).func.view_class,
                          NonRenewablesTotalPowerListView)
+
+    def test_renewable_power_generated_url(self):
+        """
+        Test renewable_power_generated_url
+        :return: pass or fail
+        """
+        url = reverse('renewable_power')
+        self.assertEqual(resolve(url).func.view_class,
+                         RenewablePowerGenerationListView)
+
+    def test_renewable_power_generated_detail_url(self):
+        """
+        Test renewable_power_generated_detail_url
+        :return: pass or fail
+        """
+        url = reverse('renewable_power_detail',
+                      args=[1])  # a valid object's primary key
+        self.assertEqual(resolve(url).func.view_class,
+                         RenewablePowerDetailView)
+
+    def test_renewable_power_generated_column_url(self):
+        """
+        Test renewable_power_generated_column_url
+        :return: pass or fail
+        """
+        url = reverse('renewable_power_column_detail',
+                      kwargs={'column_name': 'example_column'})
+        self.assertEqual(resolve(url).func.view_class,
+                         RenewablePowerColumnView)

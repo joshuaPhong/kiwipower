@@ -59,7 +59,7 @@ class ContinentConsumptionModelTest(BaseContinentConsumptionTestCase):
         Test creating a ContinentConsumption instance
         :return:
         """
-        # Test if a ContinentConsumption instance can be created and saved
+
         self.assertEqual(ContinentConsumption.objects.count(), 1)
 
     def test_str_method(self):
@@ -67,7 +67,7 @@ class ContinentConsumptionModelTest(BaseContinentConsumptionTestCase):
         Test the __str__ method of ContinentConsumption
         :return:
         """
-        # Test the __str__ method of ContinentConsumption
+
         self.assertEqual(str(self.continent_consumption), "2023")
 
     def test_year_field(self):
@@ -75,7 +75,7 @@ class ContinentConsumptionModelTest(BaseContinentConsumptionTestCase):
         Test querying by the 'year' field
         :return:
         """
-        # Test querying by the 'year' field
+
         queried_instance = ContinentConsumption.objects.filter(
             year=2023).first()
         self.assertEqual(queried_instance, self.continent_consumption)
@@ -85,13 +85,14 @@ class ContinentConsumptionModelTest(BaseContinentConsumptionTestCase):
         Test querying by individual continent fields
         :return:
         """
-        # Test querying by individual continent fields
+
         queried_instance = ContinentConsumption.objects.filter(
             europe=150.0).first()
         self.assertEqual(queried_instance, self.continent_consumption)
 
     def test_update_continent_field(self):
         """
+
 
         :return:
         """
@@ -111,7 +112,7 @@ class ContinentConsumptionModelTest(BaseContinentConsumptionTestCase):
         self.assertEqual(ContinentConsumption.objects.count(), 0)
 
 
-class ContinentConsumptionListViewTest(BaseContinentConsumptionTestCase):
+class TestContinentConsumptionListView(BaseContinentConsumptionTestCase):
     """
     Test the ContinentConsumptionListView
     """
@@ -145,7 +146,7 @@ class ContinentConsumptionListViewTest(BaseContinentConsumptionTestCase):
         self.assertIn('years', response.context)
 
 
-class ContinentConsumptionDetailViewTest(BaseContinentConsumptionTestCase):
+class TestContinentConsumptionDetailView(BaseContinentConsumptionTestCase):
     """
     Test the ContinentConsumptionDetailView
     """
@@ -153,7 +154,7 @@ class ContinentConsumptionDetailViewTest(BaseContinentConsumptionTestCase):
     def test_continent_consumption_detail_view(self):
         """
         Test the ContinentConsumptionDetailView
-        :return:
+        :return: pass, error, or fail
         """
         # Get the URL for the ContinentConsumptionDetailView
         url = reverse("continent_consumption_detail", args=[
@@ -175,7 +176,7 @@ class ContinentConsumptionDetailViewTest(BaseContinentConsumptionTestCase):
                          self.continent_consumption)
 
 
-class ContinentConsumptionColumnViewTest(BaseContinentConsumptionTestCase):
+class TestContinentConsumptionColumnView(BaseContinentConsumptionTestCase):
     """
     Test the ContinentConsumptionColumnView
     """
@@ -233,8 +234,9 @@ class BaseClassCountryConsumptionTestCase(TestCase):
             year=2020,
             china=100.0,
             usa=200.0,
+            brazil=300.0,
             belgium=300.0,
-            croatia=150.0,
+            czechia=150.0,
             france=120.0,
             germany=80.0,
             italy=180.0,
@@ -270,6 +272,7 @@ class BaseClassCountryConsumptionTestCase(TestCase):
             egypt=21.0,
             nigeria=22.0,
             south_africa=23.0,
+            iran=24.0,
             kuwait=24.0,
             saudi_arabia=25.0,
             u_a_e=26.0,
@@ -298,23 +301,29 @@ class TestCountryConsumptionListView(BaseClassCountryConsumptionTestCase):
 
 
 class TestCountryConsumptionDetailView(BaseClassCountryConsumptionTestCase):
-    def setUp(self):
-        pk = 1
-        self.view_url = reverse('country_consumption_detail', kwargs={
-            'pk': pk
-        })
+    def test_country_consumption_detail_view(self):
+        """
+        Test the ContinentConsumptionDetailView
+        :return: pass, error, or fail
+        """
+        # Get the URL for the ContinentConsumptionDetailView
+        url = reverse("country_consumption_detail", args=[
+            self.country_consumption.pk])
 
-    # fixme: this test is failing
-    def test_view_accessible(self):
-        response = self.client.get(self.view_url)
+        # Make a GET request to the view
+        response = self.client.get(url)
+
+        # Check that the view returns a 200-status code
         self.assertEqual(response.status_code, 200)
 
-    # fixme: this test is failing
-    def test_view_uses_correct_template(self):
-        response = self.client.get(self.view_url)
+        # Check that the correct template is used
         self.assertTemplateUsed(response,
-                                'display_data'
-                                '/country_energy_consumption_detail.html')
+                                "display_data/country_energy_consumption_detail.html")
+
+        # Check if the 'country_consumption' context variable contains the
+        # expected object
+        self.assertEqual(response.context['country_consumption'],
+                         self.country_consumption)
 
 
 class TestCountryConsumptionColumnView(BaseClassCountryConsumptionTestCase):
@@ -327,8 +336,9 @@ class TestCountryConsumptionColumnView(BaseClassCountryConsumptionTestCase):
             year=2020,
             china=100.0,
             usa=200.0,
+            brazil=300.0,
             belgium=300.0,
-            croatia=150.0,
+            czechia=150.0,
             france=120.0,
             germany=80.0,
             italy=180.0,
@@ -364,6 +374,7 @@ class TestCountryConsumptionColumnView(BaseClassCountryConsumptionTestCase):
             egypt=21.0,
             nigeria=22.0,
             south_africa=23.0,
+            iran=24.0,
             kuwait=24.0,
             saudi_arabia=25.0,
             u_a_e=26.0,

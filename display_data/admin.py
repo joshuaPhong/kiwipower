@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (ContinentConsumption, CountryConsumption,
                      NonRenewablesTotalPowerGenerated,
-                     RenewablesPowerGenerated, RenewableTotalPowerGenerated,
+                     RenewablePowerGenerated, RenewableTotalPowerGenerated,
                      TopTwentyRenewableCountries)
 
 
@@ -13,6 +13,6 @@ class CountryConsumptionAdmin(admin.ModelAdmin):
 admin.site.register(ContinentConsumption)
 admin.site.register(CountryConsumption, CountryConsumptionAdmin)
 admin.site.register(NonRenewablesTotalPowerGenerated)
-admin.site.register(RenewablesPowerGenerated)
+admin.site.register(RenewablePowerGenerated)
 admin.site.register(RenewableTotalPowerGenerated)
 admin.site.register(TopTwentyRenewableCountries)

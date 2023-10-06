@@ -3,6 +3,7 @@ from django.test import TestCase
 from accounts.models import CustomUser
 from django.urls import reverse
 
+
 class SignUpTests(TestCase):
     def setUp(self):
         # Create user data for testing registration
@@ -24,7 +25,8 @@ class SignUpTests(TestCase):
     #     self.assertEqual(response.status_code, 200)
 
     def test_successful_registration(self):
-        response = self.client.post(reverse('signup'), self.user_data, follow=True)
+        response = self.client.post(reverse('signup'), self.user_data,
+                                    follow=True)
 
         self.assertEqual(response.status_code, 200)
         # self.assertRedirects(response, reverse('login'))
@@ -35,3 +37,14 @@ class SignUpTests(TestCase):
 
     # def test_correct_template_used(self):
     #      self.assertTemplateUsed(response, 'registration/signup.html')
+
+
+class TestCustomUser(TestCase):
+    def test_str_method(self):
+        """
+        Test the __str__ method of RenewablePowerGenerated
+        :return: pass error fail
+        """
+        self.username = CustomUser.objects.create_user(
+            username='tester', )
+        self.assertEqual(str(self.username), "tester")
