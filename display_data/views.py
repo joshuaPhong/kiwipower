@@ -1,7 +1,7 @@
 from django.views.generic import ListView, DetailView, TemplateView
 from .models import ContinentConsumption, CountryConsumption, \
     NonRenewablesTotalPowerGenerated, RenewablePowerGenerated, \
-    RenewableTotalPowerGenerated
+    RenewableTotalPowerGenerated, TopTwentyRenewableCountries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -332,5 +332,37 @@ class RenewablesTotalPowerListView(ListView):
             plt.close()
 
             context['plot_path'] = plot_path
+
+        return context
+
+
+class TopTwentyRenewableCountriesListView(ListView):
+    model = TopTwentyRenewableCountries
+    template_name = 'display_data/top_twenty_renewable_countries.html'
+    context_object_name = 'top_twenty_renewable_countries'
+    paginate_by = 10
+
+
+class TopTwentyRenewableCountriesDetailView(DetailView):
+    model = TopTwentyRenewableCountries
+    template_name = 'display_data/top_twenty_renewable_countries_detail.html'
+    context_object_name = 'top_twenty_renewable_countries'
+
+
+class TopTwentyRenewableCountriesColumnView(TemplateView):
+    template_name = (
+        'display_data/top_twenty_renewable_countries_column_detail.html')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        column_name = self.kwargs.get('column_name', None)
+
+        if column_name:
+            queryset = TopTwentyRenewableCountries.objects.all()
+            top_twenty = pd.DataFrame.from_records(
+                queryset.values())
+
+            column_data = top_twenty[column_name]
+            context['column_data'] = column_data
 
         return context
