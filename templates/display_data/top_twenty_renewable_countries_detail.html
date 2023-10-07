@@ -1,1 +1,34 @@
-test
+{# this page access rows in the db. #}
+{% extends 'pages/base.html' %}
+{% block title %}
+    <title>Top Twenty Renewable Countries </title>
+{% endblock %}
+
+{% block content %}
+    <h1>Country: {{ top_twenty_renewable_countries.country }}</h1>
+
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th scope="col">HYDRO</th>
+            <th scope="col">BIOFUELS</th>
+            <th scope="col">SOLAR</th>
+            <th scope="col">GEOTHERMAL</th>
+            <th scope="col">TOTAL</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr>
+            <td>{{ top_twenty_renewable_countries.hydro|floatformat:2 }}</td>
+            <td>{{ top_twenty_renewable_countries.biofuels |floatformat:2 }}</td>
+            <td>{{ top_twenty_renewable_countries.solar|floatformat:2 }}</td>
+            <td>{{ top_twenty_renewable_countries.geo_thermal|floatformat:2 }}</td>
+            <td>{{ top_twenty_renewable_countries.total|floatformat:2 }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{% url 'top_twenty_renewable_countries' %}">Back</a>
+    <a href="{% url 'home' %}">Home</a>
+{% endblock %}
