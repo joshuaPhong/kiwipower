@@ -295,11 +295,12 @@ class RenewablePowerColumnView(TemplateView):
         return context
 
 
-#
 class RenewablesTotalPowerListView(ListView):
     model = RenewableTotalPowerGenerated
     template_name = 'display_data/renewables_total_power_generated.html'
     context_object_name = 'renewables_total_power'
+
+    # TODO: iN THE PLOT.PNG, WE CAN SEE THE GRID IN GIT HUB BUT NO LINES
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -341,6 +342,7 @@ class TopTwentyRenewableCountriesListView(ListView):
     template_name = 'display_data/top_twenty_renewable_countries.html'
     context_object_name = 'top_twenty_renewable_countries'
     paginate_by = 10
+    ordering = ['country']  # unordered lists return error
 
 
 class TopTwentyRenewableCountriesDetailView(DetailView):

@@ -353,7 +353,36 @@ class TopTwentyRenewableCountriesDetailView(TestCase):
     """
 
     def setUp(self) -> None:
-        pass
+        self.client = Client()
+        self.view_url = reverse(
+            'top_twenty_renewable_countries_detail', kwargs={'pk': 1})
+        self.top_twenty = (
+            TopTwentyRenewableCountries.objects.create(
+                country='example_country',
+                hydro=100.0,
+                biofuels=100.0,
+                solar=100.0,
+                geo_thermal=100.0,
+                total=100.0
+            ))
+
+    def test_view_accessible(self):
+        response = self.client.get(self.view_url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get(self.view_url)
+        self.assertTemplateUsed(response,
+                                'display_data'
+                                '/top_twenty_renewable_countries_detail.html')
+
+    def test_view_has_correct_context_data(self):
+        """
+        Test that the context data is correct
+        :return:
+        """
+        response = self.client.get(self.view_url)
+        self.assertIn('top_twenty_renewable_countries', response.context)
 
 
 class TopTwentyRenewableCountriesColumnView(TestCase):
@@ -362,4 +391,34 @@ class TopTwentyRenewableCountriesColumnView(TestCase):
     """
 
     def setUp(self) -> None:
-        pass
+        self.client = Client()
+        self.view_url = reverse(
+            'top_twenty_renewable_countries_column_detail',
+            kwargs={'column_name': 'hydro'})
+        self.top_twenty = (
+            TopTwentyRenewableCountries.objects.create(
+                country='example_country',
+                hydro=100.0,
+                biofuels=100.0,
+                solar=100.0,
+                geo_thermal=100.0,
+                total=100.0
+            ))
+
+    def test_view_accessible(self):
+        response = self.client.get(self.view_url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get(self.view_url)
+        self.assertTemplateUsed(response,
+                                'display_data'
+                                '/top_twenty_renewable_countries_column_detail.html')
+
+    def test_view_has_correct_context_data(self):
+        """
+        Test that the context data is correct
+        :return:
+        """
+        response = self.client.get(self.view_url)
+        self.assertIn('column_data', response.context)
