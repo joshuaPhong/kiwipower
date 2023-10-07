@@ -62,7 +62,9 @@ class TestContinentConsumptionModel(BaseContinentConsumptionTestCase):
         Test creating a ContinentConsumption instance
         :return:
         """
-        # Test if a ContinentConsumption instance can be created and saved
+        # Test if a ContinentConsumption instance can be created and saved.
+        # The setup instance is created in the base class. If it is
+        #  successful, there will be one object in the instance
         self.assertEqual(ContinentConsumption.objects.count(), 1)
 
     def test_str_method(self):
@@ -70,7 +72,6 @@ class TestContinentConsumptionModel(BaseContinentConsumptionTestCase):
         Test the __str__ method of ContinentConsumption
         :return:
         """
-        # Test the __str__ method of ContinentConsumption
         self.assertEqual(str(self.continent_consumption), "2023")
 
     def test_year_field(self):
@@ -78,7 +79,6 @@ class TestContinentConsumptionModel(BaseContinentConsumptionTestCase):
         Test querying by the 'year' field
         :return:
         """
-        # Test querying by the 'year' field
         queried_instance = ContinentConsumption.objects.filter(
             year=2023).first()
         self.assertEqual(queried_instance, self.continent_consumption)
@@ -110,6 +110,8 @@ class TestContinentConsumptionModel(BaseContinentConsumptionTestCase):
         :return:
         """
         # Test deleting a ContinentConsumption instance
+        # if we make an instance in the set-up, and then delete it.
+        # the count of objects will be zero
         self.continent_consumption.delete()
         self.assertEqual(ContinentConsumption.objects.count(), 0)
 

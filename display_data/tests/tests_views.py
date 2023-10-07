@@ -1,6 +1,7 @@
 import pandas as pd
 from django.test import TestCase, Client
 from django.urls import reverse
+from django.core.paginator import Paginator
 
 import os
 from PIL import Image
@@ -9,7 +10,8 @@ import io
 import matplotlib.pyplot as plt
 
 from display_data.models import NonRenewablesTotalPowerGenerated, \
-    RenewablePowerGenerated, RenewableTotalPowerGenerated
+    RenewablePowerGenerated, RenewableTotalPowerGenerated, \
+    TopTwentyRenewableCountries
 
 
 class TestNonRenewablesTotalPowerListView(TestCase):
@@ -273,3 +275,91 @@ class TestRenewablesTotalPowerListView(TestCase):
         self.assertEqual(column_data, 'hydro')
 
         # todo: test plot
+
+
+class TestTopTwentyRenewableCountriesListView(TestCase):
+    """
+    Test the TopTwentyRenewableCountriesListView
+    """
+
+    def setUp(self) -> None:
+        self.client = Client()
+        self.view_url = reverse(
+            'top_twenty_renewable_countries')
+        self.top_twenty = (
+            TopTwentyRenewableCountries.objects.create(
+                country='example_country',
+                hydro=100.0,
+                biofuels=100.0,
+                solar=100.0,
+                geo_thermal=100.0,
+                total=100.0
+            ))
+
+    def test_view_accessible(self):
+        response = self.client.get(self.view_url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        """
+        is our view sent to the right place.
+        :return: pass error fail
+        """
+        response = self.client.get(self.view_url)
+        self.assertTemplateUsed(response,
+                                'display_data'
+                                '/top_twenty_renewable_countries.html')
+
+    def test_view_has_correct_context_data(self):
+        """
+        we made an instance in the set-up. the context object we created in
+        our view should be in the url.
+        :return:
+        """
+        response = self.client.get(self.view_url)
+        self.assertTrue('top_twenty_renewable_countries' in response.context)
+
+    def test_pagination(self):
+        """
+        Test that the pagination works correctly
+        :return:
+        """
+        # For the loop, I used the example from bing.com
+        # Create 50 instances of TopTwentyRenewableCountries
+        for i in range(50):
+            TopTwentyRenewableCountries.objects.create(country=f'Country {i}',
+                                                       hydro=i, biofuels=i,
+                                                       solar=i, geo_thermal=i,
+                                                       total=i)
+        # Get the first page. In the url you can see the query string
+        response = self.client.get(
+            '/display_data/top_twenty_renewable_countries/?page=1')
+
+        # Check the status code. Did we get a response?
+        self.assertEqual(response.status_code, 200)
+
+        # Check that the correct number of objects are displayed. I set
+        # pagination = 10 in the view. There should be 10 objects on the page.
+        self.assertEqual(
+            len(response.context['top_twenty_renewable_countries']), 10)
+
+        # Check that the page number is correct
+        self.assertEqual(response.context['page_obj'].number, 1)
+
+
+class TopTwentyRenewableCountriesDetailView(TestCase):
+    """
+    Test the TopTwentyRenewableCountriesListView
+    """
+
+    def setUp(self) -> None:
+        pass
+
+
+class TopTwentyRenewableCountriesColumnView(TestCase):
+    """
+    Test the TopTwentyRenewableCountriesListView
+    """
+
+    def setUp(self) -> None:
+        pass
