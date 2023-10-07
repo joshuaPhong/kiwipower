@@ -8,7 +8,10 @@ from .views import (ContinentConsumptionListView,
                     NonRenewablesTotalPowerListView,
                     CountryConsumptionView, RenewablePowerGenerationListView,
                     RenewablePowerDetailView, RenewablePowerColumnView,
-                    RenewablesTotalPowerListView)
+                    RenewablesTotalPowerListView,
+                    TopTwentyRenewableCountriesListView,
+                    TopTwentyRenewableCountriesDetailView,
+                    TopTwentyRenewableCountriesColumnView)
 
 urlpatterns = [
     path('continent_energy_consumption/',
@@ -44,4 +47,14 @@ urlpatterns = [
          name='renewable_power_column_detail'),
     path('renewables_total_power_generated/',
          RenewablesTotalPowerListView.as_view(), name='renewables_total_power'),
+    path('top_twenty_renewable_countries/',
+         TopTwentyRenewableCountriesListView.as_view(),
+         name='top_twenty_renewable_countries'),
+    path('top_twenty_renewable_countries_detail/<int:pk>/',
+         TopTwentyRenewableCountriesDetailView.as_view(),
+         name='top_twenty_renewable_countries_detail'),
+    path('top_twenty_renewable_countries_column_detail/<str:column_name>/',
+         TopTwentyRenewableCountriesColumnView.as_view(),
+         name='top_twenty_renewable_countries_column_detail'),
+
 ]
