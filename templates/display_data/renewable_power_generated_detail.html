@@ -1,11 +1,15 @@
 {# this page access rows in the db. #}
 {% extends 'pages/base.html' %}
+{% load static %}
 {% block title %}
     <title>Renewable Power Detail</title>
 {% endblock %}
 
 {% block content %}
     <h1>Year: {{ renewable_power_generated.year }}</h1>
+
+    <a href="{% url 'renewable_power' %}">Back</a>
+    <a href="{% url 'home' %}">Home</a>
 
     <table class="table table-dark">
         <thead>
@@ -26,7 +30,8 @@
         </tr>
         </tbody>
     </table>
+    <div>
+        <img src="{% static 'display_data/images/renewable_power_plot.png' %}" alt="plot">
+    </div>
 
-    <a href="{% url 'renewable_power' %}">Back</a>
-    <a href="{% url 'home' %}">Home</a>
 {% endblock %}
