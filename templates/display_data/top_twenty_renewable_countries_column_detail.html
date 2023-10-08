@@ -7,7 +7,7 @@
     {#    <a href="{% url 'country_consumption' %}">Back to country tablet</a>#}
 
     <h2>{{ column_data.name }}</h2>
-    <p>This is the detailed data for the {{ column_data.name }} column:</p>
+    <p>This is the detailed data for the {{ column_data.name }} column: {{ column_data.country }}</p>
 
     <ul>
         {% for value in column_data %}

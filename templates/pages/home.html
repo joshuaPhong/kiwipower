@@ -5,24 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated %}
 
-        <h1>Welcome {{ user.username }}</h1>
-        <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-
-        <h1>Welcome, Guest</h1>
-
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'signup' %}">Signup</a>
-        <a href="{% url 'continent_consumption' %}">Continental consumption</a>
-        <a href="{% url 'country_consumption' %}">Country consumption</a>
-        <a href="{% url 'non_renewable_total_power' %}">Non Renewable Total Power</a>
-        <a href="{% url 'country_consumption_combined' %}">country combined view</a>
-        <a href="{% url 'renewable_power' %}">renewable power</a>
-        <a href="{% url 'renewables_total_power' %}">renewable total power</a>
-        <a href="{% url 'top_twenty_renewable_countries' %}">top twenty renewable countries</a>
-
-    {% endif %}
+    {% include 'includes/nav.html' %}
 
 {% endblock %}
