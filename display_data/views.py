@@ -214,7 +214,8 @@ class NonRenewablesTotalPowerListView(ListView):
             plt.figure(figsize=(10, 6))
             plt.barh(non_renewable_power['mode_of_generation'], column_data,
                      color='skyblue')
-            plt.xlabel('Contribution (TWh)')
+            plt.xlabel('Mode of Generation')
+            plt.ylabel('Contribution (TWh)')
             plt.title(f'{column_name} by Mode of Generation')
             plt.gca().invert_yaxis()  # Invert the y-axis for better readability
 
@@ -248,6 +249,27 @@ class RenewablePowerGenerationListView(ListView):
         context = super().get_context_data(**kwargs)
         years = RenewablePowerGenerated.objects.values_list('year', flat=True)
         context['years'] = years
+
+        queryset = RenewablePowerGenerated.objects.all()
+        # convert the queryset to a dataframe
+        renewable_power = pd.DataFrame.from_records(
+            queryset.values())
+        # Drop the 'id' column if it exists
+        if 'id' in renewable_power.columns:
+            renewable_power.drop('id', axis=1, inplace=True)
+        # set year as index
+        renewable_power.set_index('year', inplace=True)
+        # create bar graph
+        renewable_power.plot(kind='bar', stacked=True)
+        plt.xlabel('Year')
+        plt.ylabel('Power Generated (TWh)')
+        plt.title(f'Renewable Power Generation by Year (TWh)')
+
+        # save img
+        plot_path = 'static/display_data/images/renewable_power_plot.png'
+        plt.savefig(plot_path)
+        plt.close()
+
         return context
 
 
@@ -255,6 +277,38 @@ class RenewablePowerDetailView(DetailView):
     model = RenewablePowerGenerated
     template_name = 'display_data/renewable_power_generated_detail.html'
     context_object_name = 'renewable_power_generated'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        renewable_power = self.object  # The object retrieved by the DetailView
+
+        # Prepare data for plotting
+        data = {
+            'Hydro': renewable_power.hydro,
+            'Biofuels': renewable_power.biofuels,
+            'Solar': renewable_power.solar,
+            'Geo Thermal': renewable_power.geo_thermal,
+        }
+        renewable_power_df = pd.DataFrame(data, index=['Power Generated (TWh)'])
+
+        # Create a bar graph using the data
+        plt.figure(figsize=(10, 10))
+        renewable_power_df.plot(kind='bar')
+        plt.xlabel('Mode of Generation',
+                   rotation=0)
+        plt.ylabel('Power Generated (TWh)')
+        plt.title(f'Renewable Power Generation for {renewable_power.year}')
+        plt.xticks(rotation=90, ha='right')
+
+        # Save the graph as an image file
+        plot_path = 'static/display_data/images/renewable_power_plot.png'
+        plt.savefig(plot_path)
+        plt.close()
+
+        # Pass the graph path and other data to the template
+        context['plot_path'] = plot_path
+
+        return context
 
 
 class RenewablePowerColumnView(TemplateView):
@@ -304,35 +358,25 @@ class RenewablesTotalPowerListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        column_name = self.kwargs.get('column_name', None)
 
-        if column_name:
-            queryset = RenewableTotalPowerGenerated.objects.all()
-            renewable_total_power = pd.DataFrame.from_records(
-                queryset.values())
+        queryset = RenewableTotalPowerGenerated.objects.all()
+        renewable_total_power = pd.DataFrame.from_records(
+            queryset.values())
 
-            column_data = renewable_total_power[column_name]
-            context['column_data'] = column_data
+        # Create a bar graph
+        plt.figure(figsize=(10, 10))
+        plt.bar(renewable_total_power['mode_of_generation'],
+                renewable_total_power['contribution_twh'],
+                color='skyblue')
+        plt.xlabel('Mode of Generation')
+        plt.ylabel('Contribution (TWh)')
+        plt.title(f'Total Renewable Power Generation')
+        plt.xticks(rotation=90)
 
-            # Create a bar graph
-            plt.figure(figsize=(10, 6))
-            plt.barh(renewable_total_power['mode_of_generation'], column_data,
-                     color='skyblue')
-            plt.xlabel('Contribution (TWh)')
-            plt.title(f'{column_name} by Mode of Generation')
-            plt.gca().invert_yaxis()  # Invert the y-axis for better readability
-
-            # Annotate the bars with values
-            for i, v in enumerate(column_data):
-                plt.text(v + 100, i, str(v), color='black', va='center',
-                         fontsize=12, fontweight='bold')
-
-            # Save the plot image
-            plot_path = 'static/display_data/images/bar_renewable_total.png'
-            plt.savefig(plot_path, format='png')
-            plt.close()
-
-            context['plot_path'] = plot_path
+        # Save the plot image
+        plot_path = 'static/display_data/images/bar_renewable_power.png'
+        plt.savefig(plot_path, format='png')
+        plt.close()
 
         return context
 
@@ -349,6 +393,29 @@ class TopTwentyRenewableCountriesDetailView(DetailView):
     model = TopTwentyRenewableCountries
     template_name = 'display_data/top_twenty_renewable_countries_detail.html'
     context_object_name = 'top_twenty_renewable_countries'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        top_twenty = self.object  # The object retrieved by the DetailView
+
+        values = [top_twenty.hydro, top_twenty.biofuels, top_twenty.solar,
+                  top_twenty.geo_thermal, top_twenty.total]
+        labels = ['Hydro', 'Biofuels', 'Solar', 'Geo Thermal', 'Total']
+
+        plt.figure(figsize=(10, 10))
+        plt.bar(labels, values, color='skyblue')
+        plt.xlabel('Renewable energy Sources')
+        plt.ylabel(f'Contribution (TWh): {top_twenty.country}')
+        plt.title(f'Renewable Power Generation for {top_twenty.country}')
+
+        # Save the graph as an image file
+        plot_path = 'static/display_data/images/top_twenty_detail_plot.png'
+        plt.savefig(plot_path)
+        plt.close()
+
+        # Pass the graph path and other data to the template
+        context['plot_path'] = plot_path
+        return context
 
 
 class TopTwentyRenewableCountriesColumnView(TemplateView):
@@ -367,4 +434,17 @@ class TopTwentyRenewableCountriesColumnView(TemplateView):
             column_data = top_twenty[column_name]
             context['column_data'] = column_data
 
+            plt.figure(figsize=(10, 10))
+            plt.bar(top_twenty['country'], column_data, color='skyblue')
+            plt.xlabel('Country')
+            plt.ylabel('Contribution (TWh)')
+            plt.title(f'Renewable Power Generation {column_name}')
+            plt.xticks(rotation=90)
+
+            # Save the plot image
+            plot_path = 'static/display_data/images/top_twenty_column.png'
+            plt.savefig(plot_path, format='png')
+            plt.close()
+
+            context['plot_path'] = plot_path
         return context
