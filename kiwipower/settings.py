@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'display_data',
     'bootstrap5',  # added for bootstrap in the base.html template to work
+    'pdf',
 ]
 
 MIDDLEWARE = [
