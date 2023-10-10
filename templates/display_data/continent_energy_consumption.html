@@ -2,6 +2,11 @@
 
 {% block title %}Continental Energy Consumption{% endblock %}
 
+{% block nav %}
+    {% include 'includes/nav.html' %}
+{% endblock %}
+
+
 {% block content %}
 
     <div class="container">
@@ -99,4 +104,8 @@
             </span>
         </div>
     </div>
+{% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
 {% endblock %}

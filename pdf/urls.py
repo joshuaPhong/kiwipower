@@ -1,8 +1,8 @@
 from django.urls import path
 
-from .views import PdfView
+from . import views
 
 urlpatterns = [
 
-    path('signup/', PdfView.as_view(), name='signup'),
+    path('generate_pdf/', views.generate_pdf, name='pdf'),
 ]
