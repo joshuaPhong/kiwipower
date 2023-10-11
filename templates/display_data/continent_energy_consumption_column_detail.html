@@ -6,20 +6,18 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Column Detail</h1>
-    <a href="{% url 'continent_consumption' %}">Back</a>
-    {#    <a href="{% url 'country_consumption' %}">Back to country tablet</a>#}
 
-    <h2>{{ column_data.name }}</h2>
-    <p>This is the detailed data for the {{ column_data.name }} column:</p>
-
+    <div class="container-fluid mb-3">
+        <h1>Column detail for {{ column_data.name }}</h1>
+        <a href="{% url 'continent_consumption' %}" class="btn btn-primary">Back</a>
+    </div>
     <ul>
         {% for value in column_data %}
             <li>{{ value|floatformat:2 }}</li>
         {% endfor %}
     </ul>
     <div>
-        <img src="{% static 'display_data/images/plot.png' %}" alt="plot">
+        <img src="{% static 'display_data/images/plot.png' %}" class="img-fluid" alt="plot">
     </div>
 
 {% endblock %}
