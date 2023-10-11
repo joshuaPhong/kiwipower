@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% block head %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
     {# load all the bootstrap files so we can utilise the class tags #}
     {% load bootstrap5 %}

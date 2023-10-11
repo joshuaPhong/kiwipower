@@ -5,6 +5,10 @@
     <title>Top Twenty Renewable Countries </title>
 {% endblock %}
 
+{% block nav %}
+    {% include 'includes/nav.html' %}
+{% endblock %}
+
 {% block content %}
     <h1>Country: {{ top_twenty_renewable_countries.country }}</h1>
     <a href="{% url 'top_twenty_renewable_countries' %}">Back</a>
@@ -34,6 +38,9 @@
     <div>
         <img src="{% static 'display_data/images/top_twenty_detail_plot.png' %}" alt="plot">
     </div>
-
-
 {% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock %}
+```

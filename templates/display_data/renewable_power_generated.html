@@ -3,8 +3,11 @@
 
 {% block title %}Renewable Power Generation{% endblock %}
 
-{% block content %}
+{% block nav %}
+    {% include 'includes/nav.html' %}
+{% endblock %}
 
+{% block content %}
     <div class="container">
         <h1>Renewable Power Generation</h1>
         <a href="{% url 'home' %}">Home</a>
@@ -70,3 +73,8 @@
         <img src="{% static 'display_data/images/renewable_power_plot.png' %}" alt="plot">
     </div>
 {% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock %}
+```

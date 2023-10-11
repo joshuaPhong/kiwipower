@@ -2,18 +2,26 @@
 
 {% block title %}Country Energy Consumption Combined{% endblock %}
 
+{% block nav %}
+    {% include 'includes/nav.html' %}
+{% endblock %}
+
 {% block content %}
-    test
 
     {% block list_content %}
         {% include 'display_data/country_energy_consumption.html' %}
     {% endblock %}
 
     {% block detail_content %}
-        {#        {% include 'display_data/country_energy_consumption_detail.html' %}#}
+        {% include 'display_data/country_energy_consumption_detail.html' %}
     {% endblock %}
 
     {% block column_content %}
     {% endblock %}
 
 {% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock %}
+```

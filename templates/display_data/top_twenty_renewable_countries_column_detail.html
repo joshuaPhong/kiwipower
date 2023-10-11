@@ -1,6 +1,12 @@
 {% extends 'pages/base.html' %}
 {% load static %}
 
+{% block title %}Top Twenty Column Detail{% endblock %}
+
+{% block nav %}
+    {% include 'includes/nav.html' %}
+{% endblock %}
+
 {% block content %}
     <h1>Column Detail</h1>
     <a href="{% url 'top_twenty_renewable_countries' %}">Back</a>
@@ -17,6 +23,9 @@
     <div>
         <img src="{% static 'display_data/images/top_twenty_column.png' %}" alt="plot">
     </div>
-
-
 {% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock %}
+```

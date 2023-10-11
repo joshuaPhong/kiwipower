@@ -2,8 +2,11 @@
 
 {% block title %}Top Twenty Renewable Countries{% endblock %}
 
-{% block content %}
+{% block nav %}
+    {% include 'includes/nav.html' %}
+{% endblock %}
 
+{% block content %}
     <div class="container">
         <h1>Top Twenty Renewable Countries</h1>
         <a href="{% url 'home' %}">Home</a>
@@ -77,3 +80,8 @@
         </div>
     </div>
 {% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock %}
+```

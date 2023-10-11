@@ -1,8 +1,27 @@
 {% extends 'pages/base.html' %}
-
+{% block head %}
+    <style>
+        @page {
+            size: letter landscape;
+            margin: 2cm;
+            font-size: 1px;
+        }
+    </style>
+{% endblock %}
 {% block title %}Country Energy Consumption{% endblock %}
 
+{% block nav %}
+    {% include 'includes/nav.html' %}
+{% endblock %}
+
+
+
 {% block content %}
+
+    {% load static %}
+
+
+
 
     <div class="container">
         <h1>Country's Energy Consumption</h1>
@@ -285,3 +304,8 @@
         </div>
     </div>
 {% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock %}
+```

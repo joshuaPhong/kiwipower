@@ -5,6 +5,10 @@
     <title>Renewable Power Detail</title>
 {% endblock %}
 
+{% block nav %}
+    {% include 'includes/nav.html' %}
+{% endblock %}
+
 {% block content %}
     <h1>Year: {{ renewable_power_generated.year }}</h1>
 
@@ -35,3 +39,8 @@
     </div>
 
 {% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock %}
+```
