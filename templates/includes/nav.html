@@ -36,10 +36,15 @@
                     <a class="nav-link" href="{% url 'top_twenty_renewable_countries' %}">Top Twenty Renewable
                         Countries</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'pdf' %}">Download as Pdf</a>
-                </li>
-                <!-- Add more authenticated user links as needed -->
+                {#                <li class="nav-item">#}
+                {#                    {% if template_name %}#}
+                {#                        <a class="nav-link" href="{% url 'pdf' template_name=template_name %}">Download as#}
+                {#                            Pdf</a>#}
+                {#                    {% else %}#}
+                {#                        <a class="nav-link" href="{% url 'pdf_no_template_name' %}">Download as Pdf</a>#}
+                {#                    {% endif %}#}
+                {#                </li>#}
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

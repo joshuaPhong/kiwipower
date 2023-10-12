@@ -23,116 +23,158 @@
 
 
 
-    <div class="container">
+    <div class="container-fluid">
         <h1>Country's Energy Consumption</h1>
-        <a href="{% url 'home' %}">Home</a>
-        <a href=""></a>
         <div class="table-responsive">
             <table class="table table-dark table-striped">
                 <thead>
                 <tr>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='year' %}">year</a></th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='china' %}">china</a>
+                    <th>YEAR</th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='china' %}"
+                           class="btn btn-primary">china</a>
                     </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='usa' %}">usa</a></th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='brazil' %}">brazil</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='usa' %}"
+                           class="btn btn-primary">usa</a></th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='brazil' %}"
+                           class="btn btn-primary">brazil</a>
                     </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='belgium' %}">belgium</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='belgium' %}"
+                           class="btn btn-primary">belgium</a>
                     </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='czechia' %}">czechia</a>
-                    </th>
-                    <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='france' %}">france</a>
-                    </th>
-                    <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='germany' %}">germany</a>
-                    </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='italy' %}">italy</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='czechia' %}"
+                           class="btn btn-primary">czechia</a>
                     </th>
                     <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='netherlands' %}">netherlands</a>
-                    </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='poland' %}">poland</a>
-                    </th>
-                    <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='portugal' %}">portugal</a>
-                    </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='romania' %}">romania</a>
-                    </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='spain' %}">spain</a>
-                    </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='sweden' %}">sweden</a>
-                    </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='uk' %}">uk</a></th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='norway' %}">norway</a>
-                    </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='turkey' %}">turkey</a>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='france' %}"
+                           class="btn btn-primary">france</a>
                     </th>
                     <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='kazakhstan' %}">kazakhstan</a>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='germany' %}"
+                           class="btn btn-primary">germany</a>
                     </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='russia' %}">russia</a>
-                    </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='ukraine' %}">ukraine</a>
-                    </th>
-                    <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='uzbeckistan' %}">uzbeckistan</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='italy' %}"
+                           class="btn btn-primary">italy</a>
                     </th>
                     <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='argentina' %}">argentina</a>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='netherlands' %}"
+                           class="btn btn-primary">netherlands</a>
                     </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='canada' %}">canada</a>
-                    </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='chile' %}">chile</a>
-                    </th>
-                    <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='columbia' %}">columbia</a>
-                    </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='mexico' %}">mexico</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='poland' %}"
+                           class="btn btn-primary">poland</a>
                     </th>
                     <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='venezuela' %}">venezuela</a>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='portugal' %}"
+                           class="btn btn-primary">portugal</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='romania' %}"
+                           class="btn btn-primary">romania</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='spain' %}"
+                           class="btn btn-primary">spain</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='sweden' %}"
+                           class="btn btn-primary">sweden</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='uk' %}"
+                           class="btn btn-primary">uk</a></th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='norway' %}"
+                           class="btn btn-primary">norway</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='turkey' %}"
+                           class="btn btn-primary">turkey</a>
                     </th>
                     <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='indonesia' %}">indonesia</a>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='kazakhstan' %}"
+                           class="btn btn-primary">kazakhstan</a>
                     </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='japan' %}">japan</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='russia' %}"
+                           class="btn btn-primary">russia</a>
                     </th>
-                    <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='malaysia' %}">malaysia</a>
-                    </th>
-                    <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='south_korea' %}">south_korea</a>
-                    </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='taiwan' %}">taiwan</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='ukraine' %}"
+                           class="btn btn-primary">ukraine</a>
                     </th>
                     <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='thailand' %}">thailand</a>
-                    </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='india' %}">india</a>
-                    </th>
-                    <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='australia' %}">australia</a>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='uzbeckistan' %}"
+                           class="btn btn-primary">uzbeckistan</a>
                     </th>
                     <th>
-                        <a href="{% url 'country_energy_consumption_column_detail' column_name='new_zealand' %}">new_zealand</a>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='argentina' %}"
+                           class="btn btn-primary">argentina</a>
                     </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='algeria' %}">algeria</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='canada' %}"
+                           class="btn btn-primary">canada</a>
                     </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='egypt' %}">egypt</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='chile' %}"
+                           class="btn btn-primary">chile</a>
                     </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='nigeria' %}">nigeria</a>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='columbia' %}"
+                           class="btn btn-primary">columbia</a>
                     </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='south_africa' %}">south_africa</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='mexico' %}"
+                           class="btn btn-primary">mexico</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='venezuela' %}"
+                           class="btn btn-primary">venezuela</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='indonesia' %}"
+                           class="btn btn-primary">indonesia</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='japan' %}"
+                           class="btn btn-primary">japan</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='malaysia' %}"
+                           class="btn btn-primary">malaysia</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='south_korea' %}"
+                           class="btn btn-primary">south_korea</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='taiwan' %}"
+                           class="btn btn-primary">taiwan</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='thailand' %}"
+                           class="btn btn-primary">thailand</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='india' %}"
+                           class="btn btn-primary">india</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='australia' %}"
+                           class="btn btn-primary">australia</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='new_zealand' %}"
+                           class="btn btn-primary">new_zealand</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='algeria' %}"
+                           class="btn btn-primary">algeria</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='egypt' %}"
+                           class="btn btn-primary">egypt</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='nigeria' %}"
+                           class="btn btn-primary">nigeria</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='south_africa' %}"
+                           class="btn btn-primary">south_africa</a>
                     </th>
 
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='iran' %}">iran</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='iran' %}"
+                           class="btn btn-primary">iran</a>
                     </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='kuwait' %}">kuwait</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='kuwait' %}"
+                           class="btn btn-primary">kuwait</a>
                     </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='saudi_arabia' %}">saudi_arabia</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='saudi_arabia' %}"
+                           class="btn btn-primary">saudi_arabia</a>
                     </th>
-                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='u_a_e' %}">u_a_e</a>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='u_a_e' %}"
+                           class="btn btn-primary">u_a_e</a>
                     </th>
                 </tr>
                 </thead>
@@ -140,7 +182,8 @@
                 {% for consumption in country_consumption %}
                     <tr>
                         <td>
-                            <a href="{% url 'country_consumption_detail' consumption.pk %}">{{ consumption.year }}</a>
+                            <a href="{% url 'country_consumption_detail' consumption.pk %}"
+                               class="btn btn-primary">{{ consumption.year }}</a>
                         </td>
 
                         <td>
@@ -288,8 +331,8 @@
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    <a href="?page=1" class="btn btn-primary">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary">previous</a>
                 {% endif %}
 
                 <span class="current">
@@ -297,8 +340,8 @@
                 </span>
 
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">next</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-primary">last &raquo;</a>
                 {% endif %}
             </span>
         </div>

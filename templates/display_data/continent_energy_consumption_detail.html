@@ -47,6 +47,16 @@
 
         </tbody>
     </table>
+    <div class="container-fluid">
+        <p>The maximum power user in {{ continent_consumption.year }}
+            was {{ max_continent }} with {{ max_value|floatformat:2 }} TWh of
+            power
+            used.</p>
+        <p>The minimum power user in {{ continent_consumption.year }}
+            was {{ min_continent }} with {{ min_value|floatformat:2 }} TWh of
+            power
+            used.</p>
+    </div>
 
 
 {% endblock %}
