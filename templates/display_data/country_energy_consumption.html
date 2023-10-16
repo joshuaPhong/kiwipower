@@ -1,251 +1,341 @@
 {% extends 'pages/base.html' %}
-
+{% block head %}
+    <style>
+        @page {
+            size: letter landscape;
+            margin: 2cm;
+            font-size: 1px;
+        }
+    </style>
+{% endblock %}
 {% block title %}Country Energy Consumption{% endblock %}
+
+{% block nav %}
+    {% include 'includes/nav.html' %}
+{% endblock %}
+
+
 
 {% block content %}
 
-    <div class="container">
+    {% load static %}
+
+
+
+
+    <div class="container-fluid mb-3">
         <h1>Country's Energy Consumption</h1>
-        <a href="{% url 'home' %}">Home</a>
-        <a href=""></a>
-        <table class="table table-dark table-striped">
-            <thead>
-            <tr>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='year' %}">year</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='china' %}">china</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='usa' %}">usa</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='brazil' %}">brazil</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='belgium' %}">belgium</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='czechia' %}">czechia</a>
-                </th>
-                <th>
-                    <a href="{% url 'country_energy_consumption_column_detail' column_name='france' %}">france</a>
-                </th>
-                <th>
-                    <a href="{% url 'country_energy_consumption_column_detail' column_name='germany' %}">germany</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='italy' %}">italy</a></th>
-                <th>
-                    <a href="{% url 'country_energy_consumption_column_detail' column_name='netherlands' %}">netherlands</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='poland' %}">poland</a>
-                </th>
-                <th>
-                    <a href="{% url 'country_energy_consumption_column_detail' column_name='portugal' %}">portugal</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='romania' %}">romania</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='spain' %}">spain</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='sweden' %}">sweden</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='uk' %}">uk</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='norway' %}">norway</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='turkey' %}">turkey</a></th>
-                <th>
-                    <a href="{% url 'country_energy_consumption_column_detail' column_name='kazakhstan' %}">kazakhstan</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='russia' %}">russia</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='ukraine' %}">ukraine</a>
-                </th>
-                <th>
-                    <a href="{% url 'country_energy_consumption_column_detail' column_name='uzbeckistan' %}">uzbeckistan</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='argentina' %}">argentina</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='canada' %}">canada</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='chile' %}">chile</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='columbia' %}">columbia</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='mexico' %}">mexico</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='venezuela' %}">venezuela</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='indonesia' %}">indonesia</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='japan' %}">japan</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='malaysia' %}">malaysia</a>
-                </th>
-                <th>
-                    <a href="{% url 'country_energy_consumption_column_detail' column_name='south_korea' %}">south_korea</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='taiwan' %}">taiwan</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='thailand' %}">thailand</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='india' %}">india</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='australia' %}">australia</a>
-                </th>
-                <th>
-                    <a href="{% url 'country_energy_consumption_column_detail' column_name='new_zealand' %}">new_zealand</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='algeria' %}">algeria</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='egypt' %}">egypt</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='nigeria' %}">nigeria</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='south_africa' %}">south_africa</a>
-                </th>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='iran' %}">iran</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='kuwait' %}">kuwait</a></th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='saudi_arabia' %}">saudi_arabia</a>
-                </th>
-                <th><a href="{% url 'country_energy_consumption_column_detail' column_name='u_a_e' %}">u_a_e</a></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for consumption in country_consumption %}
+        <a href="{% url 'pdf_one' %}" class="btn btn-primary">Generate PDF</a>
+    </div>
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table class="table table-dark table-striped">
+                <thead>
                 <tr>
-                    <td>
-                        <a href="{% url 'country_consumption_detail' consumption.pk %}">{{ consumption.year }}</a>
-                    </td>
+                    <th>YEAR</th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='china' %}"
+                           class="btn btn-primary">china</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='usa' %}"
+                           class="btn btn-primary">usa</a></th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='brazil' %}"
+                           class="btn btn-primary">brazil</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='belgium' %}"
+                           class="btn btn-primary">belgium</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='czechia' %}"
+                           class="btn btn-primary">czechia</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='france' %}"
+                           class="btn btn-primary">france</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='germany' %}"
+                           class="btn btn-primary">germany</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='italy' %}"
+                           class="btn btn-primary">italy</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='netherlands' %}"
+                           class="btn btn-primary">netherlands</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='poland' %}"
+                           class="btn btn-primary">poland</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='portugal' %}"
+                           class="btn btn-primary">portugal</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='romania' %}"
+                           class="btn btn-primary">romania</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='spain' %}"
+                           class="btn btn-primary">spain</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='sweden' %}"
+                           class="btn btn-primary">sweden</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='uk' %}"
+                           class="btn btn-primary">uk</a></th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='norway' %}"
+                           class="btn btn-primary">norway</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='turkey' %}"
+                           class="btn btn-primary">turkey</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='kazakhstan' %}"
+                           class="btn btn-primary">kazakhstan</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='russia' %}"
+                           class="btn btn-primary">russia</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='ukraine' %}"
+                           class="btn btn-primary">ukraine</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='uzbeckistan' %}"
+                           class="btn btn-primary">uzbeckistan</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='argentina' %}"
+                           class="btn btn-primary">argentina</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='canada' %}"
+                           class="btn btn-primary">canada</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='chile' %}"
+                           class="btn btn-primary">chile</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='columbia' %}"
+                           class="btn btn-primary">columbia</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='mexico' %}"
+                           class="btn btn-primary">mexico</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='venezuela' %}"
+                           class="btn btn-primary">venezuela</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='indonesia' %}"
+                           class="btn btn-primary">indonesia</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='japan' %}"
+                           class="btn btn-primary">japan</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='malaysia' %}"
+                           class="btn btn-primary">malaysia</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='south_korea' %}"
+                           class="btn btn-primary">south_korea</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='taiwan' %}"
+                           class="btn btn-primary">taiwan</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='thailand' %}"
+                           class="btn btn-primary">thailand</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='india' %}"
+                           class="btn btn-primary">india</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='australia' %}"
+                           class="btn btn-primary">australia</a>
+                    </th>
+                    <th>
+                        <a href="{% url 'country_energy_consumption_column_detail' column_name='new_zealand' %}"
+                           class="btn btn-primary">new_zealand</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='algeria' %}"
+                           class="btn btn-primary">algeria</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='egypt' %}"
+                           class="btn btn-primary">egypt</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='nigeria' %}"
+                           class="btn btn-primary">nigeria</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='south_africa' %}"
+                           class="btn btn-primary">south_africa</a>
+                    </th>
 
-                    <td>
-                        {{ consumption.china|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.usa|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.brazil|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.belgium|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.czechia|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.france|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.germany|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.italy|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.netherlands|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.poland|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.portugal|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.romania|floatformat:2 }}
-                    </td>
-
-                    <td>
-                        {{ consumption.spain|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.sweden|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.uk|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.norway|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.turkey|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.kazakhstan|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.russia|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.ukraine|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.uzbeckistan|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.argentina|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.canada|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.chile|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.colubia|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.mexico|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.venezuela|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.indonesia|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.japan|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.malaysia|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.south_korea|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.taiwan|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.thailand|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.india|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.australia|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.new_zealand|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.algeria|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.egypt|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.nigeria|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.south_africa|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.iran|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.kuwait|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.saudi_arabia|floatformat:2 }}
-                    </td>
-                    <td>
-                        {{ consumption.u_a_e|floatformat:2 }}
-                    </td>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='iran' %}"
+                           class="btn btn-primary">iran</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='kuwait' %}"
+                           class="btn btn-primary">kuwait</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='saudi_arabia' %}"
+                           class="btn btn-primary">saudi_arabia</a>
+                    </th>
+                    <th><a href="{% url 'country_energy_consumption_column_detail' column_name='u_a_e' %}"
+                           class="btn btn-primary">u_a_e</a>
+                    </th>
                 </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="3">No data</td>
-                </tr>
+                </thead>
+                <tbody>
+                {% for consumption in country_consumption %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'country_consumption_detail' consumption.pk %}"
+                               class="btn btn-primary">{{ consumption.year }}</a>
+                        </td>
 
-            {% endfor %}
-            </tbody>
-        </table>
+                        <td>
+                            {{ consumption.china|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.usa|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.brazil|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.belgium|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.czechia|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.france|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.germany|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.italy|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.netherlands|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.poland|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.portugal|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.romania|floatformat:2 }}
+                        </td>
+
+                        <td>
+                            {{ consumption.spain|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.sweden|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.uk|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.norway|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.turkey|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.kazakhstan|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.russia|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.ukraine|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.uzbeckistan|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.argentina|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.canada|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.chile|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.colubia|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.mexico|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.venezuela|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.indonesia|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.japan|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.malaysia|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.south_korea|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.taiwan|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.thailand|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.india|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.australia|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.new_zealand|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.algeria|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.egypt|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.nigeria|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.south_africa|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.iran|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.kuwait|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.saudi_arabia|floatformat:2 }}
+                        </td>
+                        <td>
+                            {{ consumption.u_a_e|floatformat:2 }}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">No data</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    <a href="?page=1" class="btn btn-primary">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary">previous</a>
                 {% endif %}
 
                 <span class="current">
@@ -253,10 +343,15 @@
                 </span>
 
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">next</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary">next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-primary">last &raquo;</a>
                 {% endif %}
             </span>
         </div>
     </div>
 {% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock %}
+```

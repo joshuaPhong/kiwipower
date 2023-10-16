@@ -2,6 +2,7 @@ from django.views.generic import ListView, DetailView, TemplateView
 from .models import ContinentConsumption, CountryConsumption, \
     NonRenewablesTotalPowerGenerated, RenewablePowerGenerated, \
     RenewableTotalPowerGenerated, TopTwentyRenewableCountries
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -19,8 +20,17 @@ class ContinentConsumptionListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        template_name = self.template_name
+        context['template_name'] = template_name
+        print("template_name", template_name)
+
         years = ContinentConsumption.objects.values_list('year', flat=True)
         context['years'] = years
+        # i wanted to iterate key vale style, but i couldn't, this creates a
+        # list of years
+        consumption_list = list(ContinentConsumption.objects.all())
+        context['consumption_dict'] = consumption_list
         return context
 
 
@@ -28,6 +38,41 @@ class ContinentConsumptionDetailView(DetailView):
     model = ContinentConsumption
     template_name = 'display_data/continent_energy_consumption_detail.html'
     context_object_name = 'continent_consumption'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.order_by('year')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Retrieve the object
+        continent_consumption = self.get_object()
+
+        # Get a list of all field names in the model (excluding id and year)
+        field_names = [field.name for field in
+                       ContinentConsumption._meta.get_fields()][3:]  # remove
+        # id year and world
+
+        # Extract the data values for all fields dynamically
+        data = [getattr(continent_consumption, field_name) for field_name in
+                field_names]
+
+        # Create a list of tuples with (field_name, value) pairs
+        data_with_names = list(zip(field_names, data))
+
+        # Calculate the highest and lowest values in the row
+        min_pair = min(data_with_names, key=lambda x: x[1])
+        max_pair = max(data_with_names, key=lambda x: x[1])
+
+        # Add the min and max values and their corresponding field names to
+        # the context
+        context['min_value'] = min_pair[1]
+        context['max_value'] = max_pair[1]
+        context['min_continent'] = min_pair[0]
+        context['max_continent'] = max_pair[0]
+
+        return context
 
 
 class ContinentConsumptionColumnView(TemplateView):
@@ -116,6 +161,10 @@ class CountryConsumptionListView(ListView):
         context = super().get_context_data(**kwargs)
         years = CountryConsumption.objects.values_list('year', flat=True)
         context['years'] = years
+
+        template_name = self.template_name
+        context['template_name'] = template_name
+        print("template_name", template_name)
         return context
 
 
@@ -202,6 +251,10 @@ class NonRenewablesTotalPowerListView(ListView):
         context = super().get_context_data(**kwargs)
         column_name = self.kwargs.get('column_name', None)
 
+        template_name = self.template_name
+        context['template_name'] = template_name
+        print("template_name", template_name)
+
         if column_name:
             queryset = NonRenewablesTotalPowerGenerated.objects.all()
             non_renewable_power = pd.DataFrame.from_records(
@@ -217,7 +270,7 @@ class NonRenewablesTotalPowerListView(ListView):
             plt.xlabel('Mode of Generation')
             plt.ylabel('Contribution (TWh)')
             plt.title(f'{column_name} by Mode of Generation')
-            plt.gca().invert_yaxis()  # Invert the y-axis for better readability
+            plt.gca().invert_yaxis()
 
             # Annotate the bars with values
             for i, v in enumerate(column_data):
@@ -249,6 +302,10 @@ class RenewablePowerGenerationListView(ListView):
         context = super().get_context_data(**kwargs)
         years = RenewablePowerGenerated.objects.values_list('year', flat=True)
         context['years'] = years
+
+        template_name = self.template_name
+        context['template_name'] = template_name
+        print("template_name", template_name)
 
         queryset = RenewablePowerGenerated.objects.all()
         # convert the queryset to a dataframe
@@ -359,6 +416,10 @@ class RenewablesTotalPowerListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        template_name = self.template_name
+        context['template_name'] = template_name
+        # print("template_name", template_name)
+
         queryset = RenewableTotalPowerGenerated.objects.all()
         renewable_total_power = pd.DataFrame.from_records(
             queryset.values())
@@ -396,6 +457,11 @@ class TopTwentyRenewableCountriesDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        template_name = self.template_name
+        context['template_name'] = template_name
+        print("template_name", template_name)
+
         top_twenty = self.object  # The object retrieved by the DetailView
 
         values = [top_twenty.hydro, top_twenty.biofuels, top_twenty.solar,

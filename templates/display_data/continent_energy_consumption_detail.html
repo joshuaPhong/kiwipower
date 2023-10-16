@@ -4,9 +4,15 @@
     Continent Consumption Detail
 {% endblock %}
 
-{% block content %}
-    <h1>Year: {{ continent_consumption.year }}</h1>
+{% block nav %}
+    {% include 'includes/nav.html' %}
+{% endblock %}
 
+{% block content %}
+    <div class="container-fluid mb-3">
+        <h1>Year: {{ continent_consumption.year }}</h1>
+        <a href="{% url 'continent_consumption' %}" class="btn btn-primary">Back</a>
+    </div>
     <table class="table table-dark">
         <thead>
         <tr>
@@ -41,7 +47,20 @@
 
         </tbody>
     </table>
+    <div class="container-fluid">
+        <p>The maximum power user in {{ continent_consumption.year }}
+            was {{ max_continent }} with {{ max_value|floatformat:2 }} TWh of
+            power
+            used.</p>
+        <p>The minimum power user in {{ continent_consumption.year }}
+            was {{ min_continent }} with {{ min_value|floatformat:2 }} TWh of
+            power
+            used.</p>
+    </div>
 
-    <a href="{% url 'continent_consumption' %}">Back</a>
-    <a href="{% url 'home' %}">Home</a>
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
 {% endblock %}

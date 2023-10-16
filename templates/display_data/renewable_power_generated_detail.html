@@ -5,33 +5,43 @@
     <title>Renewable Power Detail</title>
 {% endblock %}
 
+{% block nav %}
+    {% include 'includes/nav.html' %}
+{% endblock %}
+
 {% block content %}
-    <h1>Year: {{ renewable_power_generated.year }}</h1>
+    <div class="container-fluid mb-3">
+        <h1>Year: {{ renewable_power_generated.year }}</h1>
+        <a href="{% url 'renewable_power' %}" class="btn btn-primary">Back</a>
+    </div>
+    <div class="container-fluid mb-3">
+        <table class="table table-dark">
+            <thead>
+            <tr>
+                <th scope="col">HYDRO</th>
+                <th scope="col">BIOFUELS</th>
+                <th scope="col">SOLAR</th>
+                <th scope="col">GEOTHERMAL</th>
+            </tr>
+            </thead>
+            <tbody>
 
-    <a href="{% url 'renewable_power' %}">Back</a>
-    <a href="{% url 'home' %}">Home</a>
-
-    <table class="table table-dark">
-        <thead>
-        <tr>
-            <th scope="col">HYDRO</th>
-            <th scope="col">BIOFUELS</th>
-            <th scope="col">SOLAR</th>
-            <th scope="col">GEOTHERMAL</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr>
-            <td>{{ renewable_power_generated.hydro|floatformat:2 }}</td>
-            <td>{{ renewable_power_generated.biofuels |floatformat:2 }}</td>
-            <td>{{ renewable_power_generated.solar|floatformat:2 }}</td>
-            <td>{{ renewable_power_generated.geo_thermal|floatformat:2 }}</td>
-        </tr>
-        </tbody>
-    </table>
-    <div>
-        <img src="{% static 'display_data/images/renewable_power_plot.png' %}" alt="plot">
+            <tr>
+                <td>{{ renewable_power_generated.hydro|floatformat:2 }}</td>
+                <td>{{ renewable_power_generated.biofuels |floatformat:2 }}</td>
+                <td>{{ renewable_power_generated.solar|floatformat:2 }}</td>
+                <td>{{ renewable_power_generated.geo_thermal|floatformat:2 }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container-fluid mb-3">
+        <img src="{% static 'display_data/images/renewable_power_plot.png' %}" class="img-fluid" alt="plot">
     </div>
 
 {% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock %}
+```

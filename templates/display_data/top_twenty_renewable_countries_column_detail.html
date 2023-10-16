@@ -1,22 +1,29 @@
 {% extends 'pages/base.html' %}
 {% load static %}
 
-{% block content %}
-    <h1>Column Detail</h1>
-    <a href="{% url 'top_twenty_renewable_countries' %}">Back</a>
-    {#    <a href="{% url 'country_consumption' %}">Back to country tablet</a>#}
+{% block title %}Top Twenty Column Detail{% endblock %}
 
-    <h2>{{ column_data.name }}</h2>
-    <p>This is the detailed data for the {{ column_data.name }} column:</p>
+{% block nav %}
+    {% include 'includes/nav.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mb-3">
+        <h1>Column detail for {{ column_data.name }}</h1>
+        <a href="{% url 'top_twenty_renewable_countries' %}" class="btn btn-primary">Back</a>
+    </div>
 
     <ul>
         {% for value in column_data %}
             <li>{{ value }}</li>
         {% endfor %}
     </ul>
-    <div>
-        <img src="{% static 'display_data/images/top_twenty_column.png' %}" alt="plot">
+    <div class="container-fluid">
+        <img src="{% static 'display_data/images/top_twenty_column.png' %}" class="img-fluid" alt="plot">
     </div>
-
-
 {% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock %}
+```

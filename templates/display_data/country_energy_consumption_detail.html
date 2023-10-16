@@ -4,112 +4,126 @@
     <title>Country Consumption Detail</title>
 {% endblock %}
 
-{% block content %}
-    <h1>Year: {{ country_consumption.year }}</h1>
-
-    <table class="table table-dark">
-        <thead>
-        <tr>
-            <th scope="col">CHINA</th>
-            <th scope="col">USA</th>
-            <th scope="col">BRAZIL</th>
-            <th scope="col">BELGIUM</th>
-            <th scope="col">CZECHIA</th>
-            <th scope="col">FRANCE</th>
-            <th scope="col">GERMANY</th>
-            <th scope="col">ITALY</th>
-            <th scope="col">NETHERLANDS</th>
-            <th scope="col">POLAND</th>
-            <th scope="col">PORTUGAL</th>
-            <th scope="col">ROMANIA</th>
-            <th scope="col">SPAIN</th>
-            <th scope="col">SWEDEN</th>
-            <th scope="col">UK</th>
-            <th scope="col">NORWAY</th>
-            <th scope="col">TURKEY</th>
-            <th scope="col">KAZAKHSTAN</th>
-            <th scope="col">RUSSIA</th>
-            <th scope="col">UKRAINE</th>
-            <th scope="col">UZBEKISTAN</th>
-            <th scope="col">ARGENTINA</th>
-            <th scope="col">CANADA</th>
-            <th scope="col">CHILE</th>
-            <th scope="col">COLOMBIA</th>
-            <th scope="col">MEXICO</th>
-            <th scope="col">VENEZUELA</th>
-            <th scope="col">INDONESIA</th>
-            <th scope="col">JAPAN</th>
-            <th scope="col">MALAYSIA</th>
-            <th scope="col">SOUTH KOREA</th>
-            <th scope="col">TAIWAN</th>
-            <th scope="col">THAILAND</th>
-            <th scope="col">INDIA</th>
-            <th scope="col">AUSTRALIA</th>
-            <th scope="col">NEW ZEALAND</th>
-            <th scope="col">ALGERIA</th>
-            <th scope="col">EGYPT</th>
-            <th scope="col">NIGERIA</th>
-            <th scope="col">SOUTH AFRICA</th>
-            <th scope="col">IRAN</th>
-            <th scope="col">KUWAIT</th>
-            <th scope="col">SAUDI ARABIA</th>
-            <th scope="col">UAE</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr>
-            <td>{{ country_consumption.china|floatformat:2 }}</td>
-            <td>{{ country_consumption.usa|floatformat:2 }}</td>
-            <td>{{ country_consumption.brazil|floatformat:2 }}</td>
-            <td>{{ country_consumption.belgium|floatformat:2 }}</td>
-            <td>{{ country_consumption.czechia|floatformat:2 }}</td>
-            <td>{{ country_consumption.france|floatformat:2 }}</td>
-            <td>{{ country_consumption.germany|floatformat:2 }}</td>
-            <td>{{ country_consumption.italy|floatformat:2 }}</td>
-            <td>{{ country_consumption.netherlands|floatformat:2 }}</td>
-            <td>{{ country_consumption.poland|floatformat:2 }}</td>
-            <td>{{ country_consumption.portugal|floatformat:2 }}</td>
-            <td>{{ country_consumption.romania|floatformat:2 }}</td>
-            <td>{{ country_consumption.spain|floatformat:2 }}</td>
-            <td>{{ country_consumption.sweden|floatformat:2 }}</td>
-            <td>{{ country_consumption.uk|floatformat:2 }}</td>
-            <td>{{ country_consumption.norway|floatformat:2 }}</td>
-            <td>{{ country_consumption.turkey|floatformat:2 }}</td>
-            <td>{{ country_consumption.kazakhstan|floatformat:2 }}</td>
-            <td>{{ country_consumption.russia|floatformat:2 }}</td>
-            <td>{{ country_consumption.ukraine|floatformat:2 }}</td>
-            <td>{{ country_consumption.uzbeckistan|floatformat:2 }}</td>
-            <td>{{ country_consumption.argentina|floatformat:2 }}</td>
-            <td>{{ country_consumption.canada|floatformat:2 }}</td>
-            <td>{{ country_consumption.chile|floatformat:2 }}</td>
-            <td>{{ country_consumption.colubia|floatformat:2 }}</td>
-            <td>{{ country_consumption.mexico|floatformat:2 }}</td>
-            <td>{{ country_consumption.venezuela|floatformat:2 }}</td>
-            <td>{{ country_consumption.indonesia|floatformat:2 }}</td>
-            <td>{{ country_consumption.japan|floatformat:2 }}</td>
-            <td>{{ country_consumption.malaysia|floatformat:2 }}</td>
-            <td>{{ country_consumption.south_korea|floatformat:2 }}</td>
-            <td>{{ country_consumption.taiwan|floatformat:2 }}</td>
-            <td>{{ country_consumption.thailand|floatformat:2 }}</td>
-            <td>{{ country_consumption.india|floatformat:2 }}</td>
-            <td>{{ country_consumption.australia|floatformat:2 }}</td>
-            <td>{{ country_consumption.new_zealand|floatformat:2 }}</td>
-            <td>{{ country_consumption.algeria|floatformat:2 }}</td>
-            <td>{{ country_consumption.egypt|floatformat:2 }}</td>
-            <td>{{ country_consumption.nigeria|floatformat:2 }}</td>
-            <td>{{ country_consumption.south_africa|floatformat:2 }}</td>
-            <td>{{ country_consumption.iran|floatformat:2 }}</td>
-            <td>{{ country_consumption.kuwait|floatformat:2 }}</td>
-            <td>{{ country_consumption.saudi_arabia|floatformat:2 }}</td>
-            <td>{{ country_consumption.u_a_e|floatformat:2 }}</td>
-        </tr>
-        </tbody>
-    </table>
-    <div>
-        <p>maximum power user in {{ country_consumption.year }} {{ max_country }} {{ max_value }} TWh</p>
-        <p>maximum power user in {{ country_consumption.year }} {{ min_country }} {{ min_value }} TWh</p>
-    </div>
-    <a href="{% url 'country_consumption' %}">Back</a>
-    <a href="{% url 'home' %}">Home</a>
+{% block nav %}
+    {% include 'includes/nav.html' %}
 {% endblock %}
+
+{% block content %}
+    <div class="container-fluid mb-3">
+        <h1>Year: {{ country_consumption.year }}</h1>
+        <a href="{% url 'country_consumption' %}" class="btn btn-primary">Back</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-dark">
+            <thead>
+            <tr>
+                <th scope="col">CHINA</th>
+                <th scope="col">USA</th>
+                <th scope="col">BRAZIL</th>
+                <th scope="col">BELGIUM</th>
+                <th scope="col">CZECHIA</th>
+                <th scope="col">FRANCE</th>
+                <th scope="col">GERMANY</th>
+                <th scope="col">ITALY</th>
+                <th scope="col">NETHERLANDS</th>
+                <th scope="col">POLAND</th>
+                <th scope="col">PORTUGAL</th>
+                <th scope="col">ROMANIA</th>
+                <th scope="col">SPAIN</th>
+                <th scope="col">SWEDEN</th>
+                <th scope="col">UK</th>
+                <th scope="col">NORWAY</th>
+                <th scope="col">TURKEY</th>
+                <th scope="col">KAZAKHSTAN</th>
+                <th scope="col">RUSSIA</th>
+                <th scope="col">UKRAINE</th>
+                <th scope="col">UZBEKISTAN</th>
+                <th scope="col">ARGENTINA</th>
+                <th scope="col">CANADA</th>
+                <th scope="col">CHILE</th>
+                <th scope="col">COLOMBIA</th>
+                <th scope="col">MEXICO</th>
+                <th scope="col">VENEZUELA</th>
+                <th scope="col">INDONESIA</th>
+                <th scope="col">JAPAN</th>
+                <th scope="col">MALAYSIA</th>
+                <th scope="col">SOUTH KOREA</th>
+                <th scope="col">TAIWAN</th>
+                <th scope="col">THAILAND</th>
+                <th scope="col">INDIA</th>
+                <th scope="col">AUSTRALIA</th>
+                <th scope="col">NEW ZEALAND</th>
+                <th scope="col">ALGERIA</th>
+                <th scope="col">EGYPT</th>
+                <th scope="col">NIGERIA</th>
+                <th scope="col">SOUTH AFRICA</th>
+                <th scope="col">IRAN</th>
+                <th scope="col">KUWAIT</th>
+                <th scope="col">SAUDI ARABIA</th>
+                <th scope="col">UAE</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <td>{{ country_consumption.china|floatformat:2 }}</td>
+                <td>{{ country_consumption.usa|floatformat:2 }}</td>
+                <td>{{ country_consumption.brazil|floatformat:2 }}</td>
+                <td>{{ country_consumption.belgium|floatformat:2 }}</td>
+                <td>{{ country_consumption.czechia|floatformat:2 }}</td>
+                <td>{{ country_consumption.france|floatformat:2 }}</td>
+                <td>{{ country_consumption.germany|floatformat:2 }}</td>
+                <td>{{ country_consumption.italy|floatformat:2 }}</td>
+                <td>{{ country_consumption.netherlands|floatformat:2 }}</td>
+                <td>{{ country_consumption.poland|floatformat:2 }}</td>
+                <td>{{ country_consumption.portugal|floatformat:2 }}</td>
+                <td>{{ country_consumption.romania|floatformat:2 }}</td>
+                <td>{{ country_consumption.spain|floatformat:2 }}</td>
+                <td>{{ country_consumption.sweden|floatformat:2 }}</td>
+                <td>{{ country_consumption.uk|floatformat:2 }}</td>
+                <td>{{ country_consumption.norway|floatformat:2 }}</td>
+                <td>{{ country_consumption.turkey|floatformat:2 }}</td>
+                <td>{{ country_consumption.kazakhstan|floatformat:2 }}</td>
+                <td>{{ country_consumption.russia|floatformat:2 }}</td>
+                <td>{{ country_consumption.ukraine|floatformat:2 }}</td>
+                <td>{{ country_consumption.uzbeckistan|floatformat:2 }}</td>
+                <td>{{ country_consumption.argentina|floatformat:2 }}</td>
+                <td>{{ country_consumption.canada|floatformat:2 }}</td>
+                <td>{{ country_consumption.chile|floatformat:2 }}</td>
+                <td>{{ country_consumption.colubia|floatformat:2 }}</td>
+                <td>{{ country_consumption.mexico|floatformat:2 }}</td>
+                <td>{{ country_consumption.venezuela|floatformat:2 }}</td>
+                <td>{{ country_consumption.indonesia|floatformat:2 }}</td>
+                <td>{{ country_consumption.japan|floatformat:2 }}</td>
+                <td>{{ country_consumption.malaysia|floatformat:2 }}</td>
+                <td>{{ country_consumption.south_korea|floatformat:2 }}</td>
+                <td>{{ country_consumption.taiwan|floatformat:2 }}</td>
+                <td>{{ country_consumption.thailand|floatformat:2 }}</td>
+                <td>{{ country_consumption.india|floatformat:2 }}</td>
+                <td>{{ country_consumption.australia|floatformat:2 }}</td>
+                <td>{{ country_consumption.new_zealand|floatformat:2 }}</td>
+                <td>{{ country_consumption.algeria|floatformat:2 }}</td>
+                <td>{{ country_consumption.egypt|floatformat:2 }}</td>
+                <td>{{ country_consumption.nigeria|floatformat:2 }}</td>
+                <td>{{ country_consumption.south_africa|floatformat:2 }}</td>
+                <td>{{ country_consumption.iran|floatformat:2 }}</td>
+                <td>{{ country_consumption.kuwait|floatformat:2 }}</td>
+                <td>{{ country_consumption.saudi_arabia|floatformat:2 }}</td>
+                <td>{{ country_consumption.u_a_e|floatformat:2 }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container-fluid">
+        <p>The maximum power user in {{ country_consumption.year }} was {{ max_country }} {{ max_value }} TWh of power
+            used.</p>
+        <p>The minimum power user in {{ country_consumption.year }} was {{ min_country }} {{ min_value }} TWh of power
+            used.</p>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock %}
+```

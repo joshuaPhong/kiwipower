@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light nav-tabs border border-secondary mb-3">
+    <a class="navbar-brand" href="{% url 'home' %}">KiwiPower</a>
+
+    <!-- Burger Menu for Small Screens -->
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'continent_consumption' %}">Continental Consumption</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'country_consumption' %}">Country Consumption</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'non_renewable_total_power' %}">Non Renewable Total Power</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'renewable_power' %}">Renewable Power</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'renewables_total_power' %}">Renewable Total Power</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'top_twenty_renewable_countries' %}">Top Twenty Renewable
+                        Countries</a>
+                </li>
+                {#                <li class="nav-item">#}
+                {#                    {% if template_name %}#}
+                {#                        <a class="nav-link" href="{% url 'pdf' template_name=template_name %}">Download as#}
+                {#                            Pdf</a>#}
+                {#                    {% else %}#}
+                {#                        <a class="nav-link" href="{% url 'pdf_no_template_name' %}">Download as Pdf</a>#}
+                {#                    {% endif %}#}
+                {#                </li>#}
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ user.username }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
