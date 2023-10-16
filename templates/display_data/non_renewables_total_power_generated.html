@@ -10,7 +10,7 @@
 {% block content %}
     <div class="container-fluid mb-3">
         <h1>Non-renewable power sources</h1>
-        <a href="{% url 'home' %}" class="btn btn-primary mb-3">Home</a>
+        <a href="{% url 'pdf_three' %}" class="btn btn-primary">Generate PDF</a>
     </div>
     <div class="table-responsive">
         <table class="table table-dark table-striped">
@@ -41,7 +41,7 @@
         </table>
 
         <div class="container-fluid mb-3">
-            <img src="{% static '/display_data/images/bar.png' %}" class="img-fluid" alt="plot">
+            <img src='/static/display_data/images/bar.png' class="img-fluid" alt="plot">
         </div>
     </div>
 {% endblock %}

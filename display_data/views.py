@@ -2,6 +2,7 @@ from django.views.generic import ListView, DetailView, TemplateView
 from .models import ContinentConsumption, CountryConsumption, \
     NonRenewablesTotalPowerGenerated, RenewablePowerGenerated, \
     RenewableTotalPowerGenerated, TopTwentyRenewableCountries
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -269,7 +270,7 @@ class NonRenewablesTotalPowerListView(ListView):
             plt.xlabel('Mode of Generation')
             plt.ylabel('Contribution (TWh)')
             plt.title(f'{column_name} by Mode of Generation')
-            plt.gca().invert_yaxis()  # Invert the y-axis for better readability
+            plt.gca().invert_yaxis()
 
             # Annotate the bars with values
             for i, v in enumerate(column_data):
@@ -417,7 +418,7 @@ class RenewablesTotalPowerListView(ListView):
 
         template_name = self.template_name
         context['template_name'] = template_name
-        print("template_name", template_name)
+        # print("template_name", template_name)
 
         queryset = RenewableTotalPowerGenerated.objects.all()
         renewable_total_power = pd.DataFrame.from_records(
