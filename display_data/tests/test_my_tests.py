@@ -136,14 +136,15 @@ class TestContinentConsumptionListView(BaseContinentConsumptionTestCase):
         self.assertTemplateUsed(response,
                                 "display_data/continent_energy_consumption.html")
 
+        # not needed as we removed cet_context data from the view
         # Check if the data from the sample objects appears in the response
         # content
-        for year in range(2020, 2031):
-            self.assertContains(response,
-                                str(2023))
-
-        # Check if the 'years' context variable is present in the response
-        self.assertIn('years', response.context)
+        # for year in range(2020, 2031):
+        #     self.assertContains(response,
+        #                         str(2023))
+        #
+        # # Check if the 'years' context variable is present in the response
+        # self.assertIn('years', response.context)
 
 
 class TestContinentConsumptionDetailView(BaseContinentConsumptionTestCase):
