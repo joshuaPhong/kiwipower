@@ -18,21 +18,6 @@ class ContinentConsumptionListView(ListView):
     ordering = ['year']
     paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        template_name = self.template_name
-        context['template_name'] = template_name
-        print("template_name", template_name)
-
-        years = ContinentConsumption.objects.values_list('year', flat=True)
-        context['years'] = years
-        # i wanted to iterate key vale style, but i couldn't, this creates a
-        # list of years
-        consumption_list = list(ContinentConsumption.objects.all())
-        context['consumption_dict'] = consumption_list
-        return context
-
 
 class ContinentConsumptionDetailView(DetailView):
     model = ContinentConsumption
@@ -109,63 +94,12 @@ class ContinentConsumptionColumnView(TemplateView):
         return context
 
 
-class CountryConsumptionView(TemplateView):
-    template_name = 'display_data/country_energy_consumption_combined.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        # Get all CountryConsumption objects ordered by year
-        queryset = CountryConsumption.objects.all().order_by('year')
-
-        # Convert the queryset to a DataFrame
-        df = pd.DataFrame.from_records(queryset.values())
-
-        # Calculate the minimum and maximum for each row
-        df['min'] = df.min(axis=1)
-        df['max'] = df.max(axis=1)
-
-        # Add the DataFrame to the context (convert to HTML for display in
-        # the template)
-        context['df'] = df.to_html(classes='table table-bordered')
-
-        # Create a plot for each country
-        for column in df.columns:
-            if column not in ['id', 'year', 'min', 'max']:
-                plt.figure(figsize=(10, 5))
-                plt.plot(df['year'], df[column])
-                plt.xlabel('Year')
-                plt.ylabel(f'{column} (TWh)')
-                plt.title(f'{column} by Year (TWh)')
-                plt.grid(True)
-
-                # Save the plot to a file
-                plot_path = f'static/display_data/images/{column}_plot.png'
-                plt.savefig(plot_path)
-                plt.close()
-
-                # Add the plot path to the context
-                context[f'{column}_plot_path'] = plot_path
-
-        return context
-
-
 class CountryConsumptionListView(ListView):
     model = CountryConsumption
     template_name = 'display_data/country_energy_consumption.html'
     context_object_name = 'country_consumption'
     ordering = ['year']
     paginate_by = 10
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        years = CountryConsumption.objects.values_list('year', flat=True)
-        context['years'] = years
-
-        template_name = self.template_name
-        context['template_name'] = template_name
-        print("template_name", template_name)
-        return context
 
 
 class CountryConsumptionDetailView(DetailView):
@@ -249,46 +183,68 @@ class NonRenewablesTotalPowerListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        column_name = self.kwargs.get('column_name', None)
 
         template_name = self.template_name
         context['template_name'] = template_name
-        print("template_name", template_name)
 
-        if column_name:
-            queryset = NonRenewablesTotalPowerGenerated.objects.all()
-            non_renewable_power = pd.DataFrame.from_records(
-                queryset.values())
+        queryset = NonRenewablesTotalPowerGenerated.objects.all()
+        non_renewable_power = pd.DataFrame.from_records(
+            queryset.values())
 
-            column_data = non_renewable_power[column_name]
-            context['column_data'] = column_data
+        # Create a bar graph
+        plt.figure(figsize=(10, 6))
+        plt.bar(non_renewable_power['mode_of_generation'],
+                non_renewable_power['contribution_twh'],
+                color='skyblue')
+        plt.xlabel('Mode of Generation')
+        plt.ylabel('Contribution (TWh)')
+        plt.title('Total Non Renewable Power Generation')
+        # plt.gca().invert_yaxis()
 
-            # Create a bar graph
-            plt.figure(figsize=(10, 6))
-            plt.barh(non_renewable_power['mode_of_generation'], column_data,
-                     color='skyblue')
-            plt.xlabel('Mode of Generation')
-            plt.ylabel('Contribution (TWh)')
-            plt.title(f'{column_name} by Mode of Generation')
-            plt.gca().invert_yaxis()
+        # Save the plot image
+        plot_path = 'static/display_data/images/bar.png'
+        plt.savefig(plot_path, format='png')
+        plt.close()
 
-            # Annotate the bars with values
-            for i, v in enumerate(column_data):
-                plt.text(v + 100, i, str(v), color='black', va='center',
-                         fontsize=12, fontweight='bold')
-
-            # Save the plot image
-            plot_path = 'static/display_data/images/bar.png'
-            plt.savefig(plot_path, format='png')
-            plt.close()
-
-            context['plot_path'] = plot_path
+        context['plot_path'] = plot_path
 
         return context
 
 
-class CountryConsumptionCombinedView:
-    pass
+class RenewablesTotalPowerListView(ListView):
+    model = RenewableTotalPowerGenerated
+    template_name = 'display_data/renewables_total_power_generated.html'
+    context_object_name = 'renewables_total_power'
+
+    # TODO: iN THE PLOT.PNG, WE CAN SEE THE GRID IN GIT HUB BUT NO LINES
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        template_name = self.template_name
+        context['template_name'] = template_name
+        # print("template_name", template_name)
+
+        queryset = RenewableTotalPowerGenerated.objects.all()
+        renewable_total_power = pd.DataFrame.from_records(
+            queryset.values())
+
+        # Create a bar graph
+        plt.figure(figsize=(10, 10))
+        plt.bar(renewable_total_power['mode_of_generation'],
+                renewable_total_power['contribution_twh'],
+                color='skyblue')
+        plt.xlabel('Mode of Generation')
+        plt.ylabel('Contribution (TWh)')
+        plt.title(f'Total Renewable Power Generation')
+        plt.xticks(rotation=90)
+
+        # Save the plot image
+        plot_path = 'static/display_data/images/bar_renewable_power.png'
+        plt.savefig(plot_path, format='png')
+        plt.close()
+
+        return context
 
 
 class RenewablePowerGenerationListView(ListView):
@@ -406,42 +362,6 @@ class RenewablePowerColumnView(TemplateView):
         return context
 
 
-class RenewablesTotalPowerListView(ListView):
-    model = RenewableTotalPowerGenerated
-    template_name = 'display_data/renewables_total_power_generated.html'
-    context_object_name = 'renewables_total_power'
-
-    # TODO: iN THE PLOT.PNG, WE CAN SEE THE GRID IN GIT HUB BUT NO LINES
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        template_name = self.template_name
-        context['template_name'] = template_name
-        # print("template_name", template_name)
-
-        queryset = RenewableTotalPowerGenerated.objects.all()
-        renewable_total_power = pd.DataFrame.from_records(
-            queryset.values())
-
-        # Create a bar graph
-        plt.figure(figsize=(10, 10))
-        plt.bar(renewable_total_power['mode_of_generation'],
-                renewable_total_power['contribution_twh'],
-                color='skyblue')
-        plt.xlabel('Mode of Generation')
-        plt.ylabel('Contribution (TWh)')
-        plt.title(f'Total Renewable Power Generation')
-        plt.xticks(rotation=90)
-
-        # Save the plot image
-        plot_path = 'static/display_data/images/bar_renewable_power.png'
-        plt.savefig(plot_path, format='png')
-        plt.close()
-
-        return context
-
-
 class TopTwentyRenewableCountriesListView(ListView):
     model = TopTwentyRenewableCountries
     template_name = 'display_data/top_twenty_renewable_countries.html'
@@ -514,3 +434,7 @@ class TopTwentyRenewableCountriesColumnView(TemplateView):
 
             context['plot_path'] = plot_path
         return context
+
+
+class CountryConsumptionView:
+    pass
