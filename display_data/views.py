@@ -109,7 +109,7 @@ class CountryConsumptionDetailView(DetailView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.order_by('year')
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -367,7 +367,8 @@ class TopTwentyRenewableCountriesListView(ListView):
     template_name = 'display_data/top_twenty_renewable_countries.html'
     context_object_name = 'top_twenty_renewable_countries'
     paginate_by = 10
-    ordering = ['country']  # unordered lists return error
+    ordering = ['-total']  # unordered lists return error. Ordered highest
+    # to lowest
 
 
 class TopTwentyRenewableCountriesDetailView(DetailView):
@@ -407,6 +408,8 @@ class TopTwentyRenewableCountriesDetailView(DetailView):
 class TopTwentyRenewableCountriesColumnView(TemplateView):
     template_name = (
         'display_data/top_twenty_renewable_countries_column_detail.html')
+
+    # ordering = ['total']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
