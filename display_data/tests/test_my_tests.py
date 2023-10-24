@@ -469,3 +469,10 @@ class TestNonRenewablesTotalPowerListView(TestCase):
         self.assertIn(column_name, df.columns)
         column_data = df[column_name].values[0]
         self.assertEqual(column_data, 'example_column')
+
+    def test_str_method(self):
+        """
+        Test the __str__ method of RenewablePowerGenerated
+        :return: pass error fail
+        """
+        self.assertEqual(str(self.non_renewable_power), "example_column")
