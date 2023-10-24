@@ -3,7 +3,8 @@ from django.db import IntegrityError
 from django.test import TestCase, Client
 from display_data.models import ContinentConsumption, \
     NonRenewablesTotalPowerGenerated, \
-    CountryConsumption, RenewablePowerGenerated, RenewableTotalPowerGenerated
+    CountryConsumption, RenewablePowerGenerated, RenewableTotalPowerGenerated, \
+    TopTwentyRenewableCountries
 from django.urls import reverse, resolve
 import os
 from PIL import Image
@@ -230,3 +231,45 @@ class TestNonRenewablesTotalPowerGenerated(TestCase):
         # Test the __str__ method of NonRenewablesTotalPowerGenerated coal
         # will be returned from the list
         self.assertEqual(str(self.non_renewable_total_power), "coal")
+
+
+class TestTopTwentyRenewableCountries(TestCase):
+    """
+    Test the TopTwentyRenewableCountries model
+    """
+
+    def setUp(self) -> None:
+        self.client = Client()
+        # Create a sample RenewablesTotalPowerGenerated instance for testing
+        self.top_twenty_renewable_countries = (
+            TopTwentyRenewableCountries.objects.create(
+                country="china",
+                hydro=1000.0,
+                biofuels=200.0,
+                solar=300.0,
+                geo_thermal=150.0,
+                total=1650.0
+            ))
+
+    def test_if_the_objects_are_created(self):
+        """
+        Test if the objects are created
+        :return: pass error fail
+        """
+        self.assertEqual(
+            self.top_twenty_renewable_countries.country, 'china')
+        self.assertEqual(self.top_twenty_renewable_countries.hydro, 1000.0)
+        self.assertEqual(self.top_twenty_renewable_countries.biofuels, 200.0)
+        self.assertEqual(self.top_twenty_renewable_countries.solar, 300.0)
+        self.assertEqual(self.top_twenty_renewable_countries.geo_thermal,
+                         150.0)
+        self.assertEqual(self.top_twenty_renewable_countries.total, 1650.0)
+
+    def test_str_method(self):
+        """
+        Test the __str__ method of NonRenewablesTotalPowerGenerated
+        :return: pass error fail
+        """
+        # Test the __str__ method of NonRenewablesTotalPowerGenerated coal
+        # will be returned from the list
+        self.assertEqual(str(self.top_twenty_renewable_countries), "china")
