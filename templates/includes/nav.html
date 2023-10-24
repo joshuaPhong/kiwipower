@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light nav-tabs border border-secondary mb-3">
-    <a class="navbar-brand" href="{% url 'home' %}">KiwiPower</a>
+    <a class="navbar-brand ms-3" href="{% url 'home' %}">KiwiPower</a>
 
     <!-- Burger Menu for Small Screens -->
     <button
-            class="navbar-toggler"
+            class="navbar-toggler me-3 mb-1 mt-1"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
@@ -14,7 +14,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse ms-3" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
                 <li class="nav-item">
@@ -45,14 +45,15 @@
                 {#                    {% endif %}#}
                 {#                </li>#}
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown me-3">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ user.username }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
+                        {#                        '#' for user change password if implemented#}
+                        <a class="dropdown-item" href="#">#</a>
+                        <a class="dropdown-item" href="#">#</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                     </div>

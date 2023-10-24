@@ -8,8 +8,16 @@
     {% include 'includes/nav.html' %}
 {% endblock %}
 
+{% block header %}
+    <div class="container-fluid mb-3">
+        <h1 class="display-3 mb-3">Home Page</h1>
+    </div>
+{% endblock %}
+
 {% block content %}
-    <p>Some content about our statistics apps </p>
+    <div class="container-fluid">
+        <p class="ms-3">Some content about our statistics apps </p>
+    </div>
 {% endblock %}
 
 {% block footer %}

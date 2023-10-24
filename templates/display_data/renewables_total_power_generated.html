@@ -7,11 +7,15 @@
     {% include 'includes/nav.html' %}
 {% endblock %}
 
-{% block content %}
+{% block header %}
     <div class="container-fluid mb-3">
-        <h1>Renewable total Power</h1>
+        <h1 class="display-3 mb-3">Total Renewable Power Generation</h1>
         <a href="{% url 'pdf_five' %}" class="btn btn-primary">Generate PDF</a>
     </div>
+{% endblock %}
+
+{% block content %}
+
     <div class="container-fluid mb-3">
         <table class="table table-dark table-striped">
             <thead>

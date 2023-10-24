@@ -7,11 +7,15 @@
     {% include 'includes/nav.html' %}
 {% endblock %}
 
-{% block content %}
+{% block header %}
     <div class="container-fluid mb-3">
-        <h1>Non-renewable power sources</h1>
+        <h1 class="display-3 mb-3">Non-renewable power sources</h1>
         <a href="{% url 'pdf_three' %}" class="btn btn-primary">Generate PDF</a>
     </div>
+{% endblock %}
+
+{% block content %}
+
     <div class="table-responsive">
         <table class="table table-dark table-striped">
             <thead>

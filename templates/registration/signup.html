@@ -2,13 +2,30 @@
 
 {% block title %}SignUp{% endblock %}
 
-{% block content %}
-
-<h1>Sign Up</h1>
-    <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Log In</button>
-    </form>
-
+{% block nav %}
+    {% include 'includes/nav.html' %}
 {% endblock %}
+
+{% block header %}
+    <div class="container-fluid mb-3">
+        <h1 class="display-3 mb-3">Sign Up</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        {% if form.errors %}
+            <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock %}
+```

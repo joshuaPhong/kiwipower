@@ -14,19 +14,17 @@
     {% include 'includes/nav.html' %}
 {% endblock %}
 
-
+{% block header %}
+    <div class="container-fluid mb-3">
+        <h1 class="display-3 mb-3">Country Energy Consumption</h1>
+        <a href="{% url 'pdf_one' %}" class="btn btn-primary">Generate PDF</a>
+    </div>
+{% endblock %}
 
 {% block content %}
 
     {% load static %}
 
-
-
-
-    <div class="container-fluid mb-3">
-        <h1>Country's Energy Consumption</h1>
-        <a href="{% url 'pdf_one' %}" class="btn btn-primary">Generate PDF</a>
-    </div>
     <div class="container-fluid">
         <div class="table-responsive">
             <table class="table table-dark table-striped">
