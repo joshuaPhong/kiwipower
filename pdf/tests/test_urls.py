@@ -64,3 +64,12 @@ class UrlsTest(TestCase):
         url = reverse('pdf_six')
         self.assertEqual(resolve(url).func,
                          pdf_two)
+
+    # fixme: this is supposed to test the else in the pdf view
+    # def test_unexpected_url(self):
+    #     """
+    #     Test unexpected url
+    #     :return: pass, error, or fail
+    #     """
+    #     url = reverse('unexpected')
+    #     self.assertNotEqual(resolve(url).func, pdf_two)

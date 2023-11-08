@@ -72,9 +72,18 @@ class ContinentConsumptionColumnView(TemplateView):
             queryset = ContinentConsumption.objects.all()
             continent_consumption = pd.DataFrame.from_records(
                 queryset.values())
-
+            # mine
             column_data = continent_consumption[column_name]
             context['column_data'] = column_data
+            # mine
+            column_year = continent_consumption['year']
+            context['column_year'] = column_year
+
+            # gpt.
+            # I wanted both the year and the data in the same list
+            # Combine values and years into a list of tuples
+            column_data_and_year = list(zip(column_year, column_data))
+            context['column_data_and_year'] = column_data_and_year
 
             #     create a plot
             plt.figure(figsize=(10, 5))

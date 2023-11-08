@@ -5,19 +5,31 @@
     {% include 'includes/nav.html' %}
 {% endblock %}
 
-{% block content %}
-
+{% block header %}
     <div class="container-fluid mb-3">
-        <h1>Column detail for {{ column_data.name }}</h1>
+        <h1 class="display-4 mb-3"> {{ column_data.name|title }}'s power consumption by year (tWh)</h1>
         <a href="{% url 'continent_consumption' %}" class="btn btn-primary">Back</a>
     </div>
-    <ul>
-        {% for value in column_data %}
-            <li>{{ value|floatformat:2 }}</li>
-        {% endfor %}
-    </ul>
+
+{% endblock %}
+
+{% block content %}
+
     <div>
         <img src="{% static 'display_data/images/plot.png' %}" class="img-fluid" alt="plot">
+    </div>
+
+    <div class="container-fluid mb-3">
+        <h1 class="display-5 mb-3 text-center"> Year : TWh's</h1>
+    </div>
+
+    <div class="container-fluid mx-auto">
+        <dl class="row">
+            {% for year, value in column_data_and_year %}
+                <dt class="col-sm-1 text-end">{{ year }}<em>:</em></dt>
+                <dd class="col-sm-1">{{ value|floatformat:0 }}</dd>
+            {% endfor %}
+        </dl>
     </div>
 
 {% endblock %}
